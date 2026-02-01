@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aZoom Car Rental - Premium Car Rental Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><img src="Logo/aZoomCarRental.png" alt="aZoom Car Rental"></a>
+            </div>
+            <nav class="nav" id="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="rentals.html">Rentals</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="my-bookings.html">My Bookings</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-search" id="nav-search">
+                <form id="nav-search-form" onsubmit="event.preventDefault(); handleSearch(document.getElementById('nav-search-input').value)">
+                    <input type="text" id="nav-search-input" placeholder="Search cars, models...">
+                    <button class="btn-search" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-signin" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+            <div class="hero-content">
+            <h1>Premium Electric Car Rentals</h1>
+            <p>Drive green, drive smart — 100% electric fleet for eco-conscious travelers</p>
+        </div>
+    </section>
+
+    <!-- Filter Section moved to rentals.html -->
+
+    <!-- Featured Cars CTA (links to Rentals page) -->
+    <section class="featured-cars-cta">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-text">
+                    <h2>Our Electric Fleet</h2>
+                    <p class="section-description">Discover our premium selection of 100% electric rental cars — from compact city EVs to luxury electric SUVs. As an eco-friendly car rental company, we're committed to sustainable transportation. Visit the Rentals page to filter, compare and book the perfect electric vehicle for your trip.</p>
+                </div>
+                <a href="rentals.html" class="cta-btn">Browse Electric Cars</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Why Choose aZoom?</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>100% Electric Fleet</h3>
+                    <p>All our vehicles are fully electric — zero emissions, maximum performance</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌱</div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Reduce your carbon footprint while enjoying premium transportation</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>Competitive rates with discounts for weekly & monthly rentals</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Two Convenient Locations</h3>
+                    <p>Pick up and return at our Downtown or Airport branches</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>About aZoom Car Rental</h2>
+            <p>aZoom Car Rental is a local car rental company that specializes in renting electric cars for the environmentally conscious public. We offer an attractive option for sustainable transportation with our 100% electric fleet. Rent daily, weekly, or monthly — reservations are made online using a credit card, and you can pick up and return your car at either of our two convenient branches: Downtown or Airport.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Our Branches</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>🏢 Downtown Branch</h3>
+                    <p>123 Electric Ave, City Center</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                </div>
+                <div class="contact-item">
+                    <h3>✈️ Airport Branch</h3>
+                    <p>456 Terminal Rd, Airport Plaza</p>
+                    <p>📞 +1 (555) 987-6543</p>
+                </div>
+                <div class="contact-item">
+                    <h3>✉️ Email</h3>
+                    <p>info@azoomcarrental.com</p>
+                    <p>Open: Mon-Sun 8AM - 8PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>For Renters</h4>
+                    <ul>
+                        <li><a href="rentals.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#contact">Our Branches</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Branches</h4>
+                    <ul>
+                        <li>Downtown: 123 Electric Ave</li>
+                        <li>Airport: 456 Terminal Rd</li>
+                        <li>Open: Mon-Sun 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 aZoom Car Rental. 100% Electric Fleet. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

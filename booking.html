@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Car - aZoom Car Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="booking.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><img src="Logo/aZoomCarRental.png" alt="aZoom Car Rental"></a>
+            </div>
+            <nav class="nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rentals.html">Rentals</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="my-bookings.html">My Bookings</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-signin" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <section class="car-details-container">
+        <div class="car-details-header">
+            <h2 id="car-name"></h2>
+            <p id="car-price"></p>
+        </div>
+
+        <div class="car-gallery">
+            <div class="main-image">
+                <img id="main-image" src="" alt="Car image">
+            </div>
+        </div>
+
+        <div class="thumbnail-gallery">
+            <div class="thumbnails-container" id="thumbnails-container"></div>
+        </div>
+
+        <div class="car-info">
+            <h3>Vehicle Information</h3>
+            <div class="info-row">
+                <span class="info-label">Model:</span>
+                <span class="info-value" id="car-model"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Daily Rate:</span>
+                <span class="info-value" id="car-rate"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Availability:</span>
+                <span class="info-value" id="car-availability"></span>
+            </div>
+        </div>
+
+        <div class="booking-form">
+            <h3>Rental Details</h3>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="rental-period">Rental Period Type:</label>
+                    <select id="rental-period" name="rental-period" required>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly (10% off)</option>
+                        <option value="monthly">Monthly (20% off)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rental-duration">Duration:</label>
+                    <input type="number" id="rental-duration" name="rental-duration" min="1" value="1" required>
+                    <small id="duration-hint">Number of days</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="car-color">Preferred Color:</label>
+                    <select id="car-color" name="car-color" required>
+                        <option value="">Select a color</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Red">Red</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Gray">Gray</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-branch">Pick-up Branch:</label>
+                    <select id="pickup-branch" name="pickup-branch" required>
+                        <option value="">Select a branch</option>
+                        <option value="Downtown Branch - 123 Electric Ave, City Center">Downtown Branch - 123 Electric Ave, City Center</option>
+                        <option value="Airport Branch - 456 Terminal Rd, Airport Plaza">Airport Branch - 456 Terminal Rd, Airport Plaza</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="return-branch">Return Branch:</label>
+                    <select id="return-branch" name="return-branch" required>
+                        <option value="">Select a branch</option>
+                        <option value="Downtown Branch - 123 Electric Ave, City Center">Downtown Branch - 123 Electric Ave, City Center</option>
+                        <option value="Airport Branch - 456 Terminal Rd, Airport Plaza">Airport Branch - 456 Terminal Rd, Airport Plaza</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date-from">Pick-up Date:</label>
+                    <input type="date" id="date-from" name="date-from" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Pick-up Time:</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-method">Payment Method:</label>
+                    <select id="payment-method" name="payment-method" required>
+                        <option value="Credit Card" selected>Credit Card (Required)</option>
+                    </select>
+                    <small style="color: #27ae60;">🔒 Secure credit card payment only</small>
+                </div>
+
+                <div class="price-summary" id="price-summary" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <p><strong>Estimated Total:</strong> <span id="estimated-total">$0</span></p>
+                    <small id="discount-info" style="color: #27ae60;"></small>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submit-booking">Proceed to Payment</button>
+            </form>
+        </div>
+
+        <div class="action-buttons">
+            <a href="index.html#rentals" class="btn-back">Back to Rentals</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>For Renters</h4>
+                    <ul>
+                        <li><a href="rentals.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Our Services</a></li>
+                        <li><a href="index.html#contact">Our Branches</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Branches</h4>
+                    <ul>
+                        <li>Downtown: 123 Electric Ave</li>
+                        <li>Airport: 456 Terminal Rd</li>
+                        <li>Open: Mon-Sun 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 aZoom Car Rental. 100% Electric Fleet. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="booking.js"></script>
+</body>
+</html>

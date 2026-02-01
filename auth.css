@@ -1,0 +1,276 @@
+/* ========== AUTH PAGES STYLING ========== */
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.05) 0%, rgba(230, 76, 60, 0.05) 100%);
+}
+
+.auth-box {
+    background: white;
+    border-radius: 12px;
+    padding: 50px 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-width: 420px;
+    width: 100%;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-box h2 {
+    font-size: 2em;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+}
+
+/* User Type Toggle */
+.user-type-toggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    background: #f5f5f5;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+}
+
+.toggle-btn:hover {
+    background: rgba(230, 76, 60, 0.05);
+}
+
+.toggle-btn.active {
+    background: white;
+    color: #e74c3c;
+    box-shadow: 0 2px 8px rgba(230, 76, 60, 0.15);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(230, 76, 60, 0.1);
+    background: rgba(230, 76, 60, 0.01);
+}
+
+.password-hint,
+.email-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.85em;
+    color: #999;
+}
+
+.email-hint {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: #333;
+    font-weight: 500;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #e74c3c;
+}
+
+.forgot-password {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: #d63a25;
+    text-decoration: underline;
+}
+
+.form-group.checkbox {
+    margin-bottom: 25px;
+}
+
+.form-group.checkbox label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.form-group.checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: #e74c3c;
+    flex-shrink: 0;
+}
+
+.form-group.checkbox a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.form-group.checkbox a:hover {
+    color: #d63a25;
+    text-decoration: underline;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #e74c3c 0%, #d63a25 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(230, 76, 60, 0.3);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Auth Footer */
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.auth-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.auth-link:hover {
+    color: #d63a25;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .auth-box {
+        padding: 40px 25px;
+    }
+
+    .auth-box h2 {
+        font-size: 1.6em;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-options {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .remember-me {
+        margin-bottom: 10px;
+    }
+
+    .forgot-password {
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - aZoom Car Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><img src="Logo/aZoomCarRental.png" alt="aZoom Car Rental"></a>
+            </div>
+            <nav class="nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rentals.html">Rentals</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="my-bookings.html">My Bookings</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-signin" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <section class="auth-container">
+        <div class="auth-box" style="max-width: 600px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #3498db, #2ecc71); display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 2.5em; color: white; font-weight: bold;" id="profile-avatar">
+                </div>
+                <h2 style="margin: 0;">My Profile</h2>
+                <p class="auth-subtitle">Manage your account information</p>
+            </div>
+
+            <form id="profileForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required disabled style="background: #f5f5f5; cursor: not-allowed;">
+                    <small style="color: #999; font-size: 0.85em; display: block; margin-top: 5px;">Email cannot be changed</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" name="currentPassword" placeholder="Leave blank to keep current password">
+                </div>
+
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" name="newPassword" placeholder="Enter new password (optional)">
+                    <small class="password-hint">At least 8 characters, 1 uppercase, 1 number</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-new-password">Confirm New Password</label>
+                    <input type="password" id="confirm-new-password" name="confirmNewPassword" placeholder="Confirm new password">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px;">
+                    <button type="button" class="btn-submit" onclick="window.location.href='index.html'" style="background: #95a5a6;">Cancel</button>
+                    <button type="submit" class="btn-submit">Save Changes</button>
+                </div>
+            </form>
+
+            <div style="margin-top: 30px; padding-top: 30px; border-top: 2px solid #eee;">
+                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #333;">Account Statistics</h3>
+                <div id="accountStats" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="margin: 8px 0;"><strong>Member Since:</strong> <span id="memberSince">Loading...</span></p>
+                    <p style="margin: 8px 0;"><strong>Total Bookings:</strong> <span id="totalBookings">0</span></p>
+                    <p style="margin: 8px 0;"><strong>Active Rentals:</strong> <span id="activeRentals">0</span></p>
+                    <p style="margin: 8px 0;"><strong>Total Spent:</strong> <span id="totalSpent">$0.00</span></p>
+                </div>
+                
+                <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #333;">Account Actions</h3>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" onclick="window.location.href='my-bookings.html'" style="flex: 1; min-width: 140px; padding: 12px; background: #3498db; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
+                        📅 My Bookings
+                    </button>
+                    <button type="button" onclick="logout()" style="flex: 1; min-width: 140px; padding: 12px; background: #95a5a6; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
+                        🚪 Sign Out
+                    </button>
+                </div>
+                
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <h3 style="font-size: 1.1em; margin-bottom: 15px; color: #e74c3c;">⚠️ Danger Zone</h3>
+                    <button type="button" onclick="showDeleteAccountWarning()" style="width: 100%; padding: 12px; background: white; color: #e74c3c; border: 2px solid #e74c3c; border-radius: 6px; font-weight: 600; cursor: pointer;">
+                        🗑️ Delete My Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>For Renters</h4>
+                    <ul>
+                        <li><a href="rentals.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Our Services</a></li>
+                        <li><a href="index.html#contact">Our Branches</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Branches</h4>
+                    <ul>
+                        <li>Downtown: 123 Electric Ave</li>
+                        <li>Airport: 456 Terminal Rd</li>
+                        <li>Open: Mon-Sun 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 aZoom Car Rental. 100% Electric Fleet. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function validatePassword(password) {
+            if (password.length < 8) return 'Password must be at least 8 characters';
+            if (!/[A-Z]/.test(password)) return 'Password must contain at least 1 uppercase letter';
+            if (!/[0-9]/.test(password)) return 'Password must contain at least 1 number';
+            return '';
+        }
+
+        // Load user profile data
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const currentAdmin = JSON.parse(localStorage.getItem('currentAdmin') || 'null');
+            
+            const user = currentUser || currentAdmin;
+            
+            if (!user) {
+                alert('Please sign in to view your profile');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Populate form fields
+            document.getElementById('first-name').value = user.firstName || '';
+            document.getElementById('last-name').value = user.lastName || '';
+            document.getElementById('email').value = user.email || '';
+
+            // Set avatar initial
+            const initial = user.firstName ? user.firstName.charAt(0).toUpperCase() : 'U';
+            document.getElementById('profile-avatar').textContent = initial;
+
+            // Handle form submission
+            document.getElementById('profileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const firstName = document.getElementById('first-name').value.trim();
+                const lastName = document.getElementById('last-name').value.trim();
+                const currentPassword = document.getElementById('current-password').value;
+                const newPassword = document.getElementById('new-password').value;
+                const confirmNewPassword = document.getElementById('confirm-new-password').value;
+
+                // Validate required fields
+                if (!firstName || !lastName) {
+                    alert('Please enter your full name');
+                    return;
+                }
+
+                // If changing password
+                if (newPassword || confirmNewPassword) {
+                    // Check current password is provided
+                    if (!currentPassword) {
+                        alert('Please enter your current password to change it');
+                        return;
+                    }
+
+                    // Verify current password
+                    if (currentPassword !== user.password) {
+                        alert('Current password is incorrect');
+                        return;
+                    }
+
+                    // Validate new password
+                    const passwordError = validatePassword(newPassword);
+                    if (passwordError) {
+                        alert(passwordError);
+                        return;
+                    }
+
+                    // Check passwords match
+                    if (newPassword !== confirmNewPassword) {
+                        alert('New passwords do not match');
+                        return;
+                    }
+
+                    // Update password
+                    user.password = newPassword;
+                }
+
+                // Update user info
+                user.firstName = firstName;
+                user.lastName = lastName;
+
+                // Save to localStorage
+                if (currentUser) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    
+                    // Update in users array
+                    const users = JSON.parse(localStorage.getItem('azoom_users') || '[]');
+                    const userIndex = users.findIndex(u => u.id === user.id);
+                    if (userIndex !== -1) {
+                        users[userIndex] = user;
+                        localStorage.setItem('azoom_users', JSON.stringify(users));
+                    }
+                } else if (currentAdmin) {
+                    localStorage.setItem('currentAdmin', JSON.stringify(user));
+                    
+                    // Update in staff array
+                    const staff = JSON.parse(localStorage.getItem('azoom_staff') || '[]');
+                    const staffIndex = staff.findIndex(s => s.id === user.id);
+                    if (staffIndex !== -1) {
+                        staff[staffIndex] = user;
+                        localStorage.setItem('azoom_staff', JSON.stringify(staff));
+                    }
+                }
+
+                alert('Profile updated successfully!');
+                window.location.reload();
+            });
+            
+            // Load account statistics
+            loadAccountStats(user);
+        });
+        
+        // Load account statistics
+        function loadAccountStats(user) {
+            const bookings = JSON.parse(localStorage.getItem('azoom_bookings') || '[]');
+            const userBookings = bookings.filter(b => b.userEmail === user.email);
+            const activeRentals = userBookings.filter(b => b.status === 'confirmed').length;
+            const totalSpent = userBookings.reduce((sum, b) => sum + (parseFloat(b.total) || 0), 0);
+            
+            const memberSince = user.signupDate 
+                ? new Date(user.signupDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+                : 'N/A';
+            
+            document.getElementById('memberSince').textContent = memberSince;
+            document.getElementById('totalBookings').textContent = userBookings.length;
+            document.getElementById('activeRentals').textContent = activeRentals;
+            document.getElementById('totalSpent').textContent = '$' + totalSpent.toFixed(2);
+        }
+        
+        // Show delete account warning
+        function showDeleteAccountWarning() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const bookings = JSON.parse(localStorage.getItem('azoom_bookings') || '[]');
+            const activeBookings = bookings.filter(b => b.userEmail === currentUser.email && b.status === 'confirmed');
+            
+            if (activeBookings.length > 0) {
+                alert(`⚠️ Cannot Delete Account\n\nYou have ${activeBookings.length} active rental(s).\n\nPlease return or cancel all active rentals before deleting your account.`);
+                return;
+            }
+            
+            const confirmDelete = confirm(
+                '⚠️ DELETE ACCOUNT\n\n' +
+                'This action is PERMANENT and cannot be undone.\n\n' +
+                'Your account and all associated data will be deleted.\n' +
+                'Your booking history will be preserved for admin records.\n\n' +
+                'Are you sure you want to delete your account?'
+            );
+            
+            if (!confirmDelete) return;
+            
+            // Ask for email confirmation
+            const emailConfirm = prompt(`To confirm, please type your email address:\n${currentUser.email}`);
+            
+            if (emailConfirm === null) return; // Cancelled
+            
+            if (emailConfirm.toLowerCase() !== currentUser.email.toLowerCase()) {
+                alert('Email does not match. Account deletion cancelled.');
+                return;
+            }
+            
+            // Delete the account
+            deleteAccount(currentUser);
+        }
+        
+        // Delete account function
+        function deleteAccount(currentUser) {
+            // Remove from users list
+            const users = JSON.parse(localStorage.getItem('azoom_users') || '[]');
+            const userIndex = users.findIndex(u => u.email.toLowerCase() === currentUser.email.toLowerCase());
+            
+            if (userIndex !== -1) {
+                users.splice(userIndex, 1);
+                localStorage.setItem('azoom_users', JSON.stringify(users));
+            }
+            
+            // Clear current session
+            localStorage.removeItem('currentUser');
+            
+            alert('Your account has been successfully deleted.\n\nThank you for using aZoom Car Rental. We\'re sorry to see you go!');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

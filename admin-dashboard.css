@@ -1,0 +1,1605 @@
+/* ========== ADMIN DASHBOARD STYLING ========== */
+
+.admin-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.admin-sidebar {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    padding: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    border-bottom: 2px solid rgba(230, 76, 60, 0.3);
+    text-align: center;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #e74c3c;
+}
+
+.sidebar-nav {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    padding: 15px 20px;
+    color: #b0b0b0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    background: rgba(230, 76, 60, 0.1);
+    color: white;
+    border-left-color: #e74c3c;
+}
+
+.nav-item.active {
+    background: rgba(230, 76, 60, 0.15);
+    color: #e74c3c;
+    border-left-color: #e74c3c;
+}
+
+.nav-item.logout {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    color: #ff6b6b;
+}
+
+.nav-item.logout:hover {
+    background: rgba(255, 107, 107, 0.1);
+    border-left-color: #ff6b6b;
+}
+
+.icon {
+    font-size: 1.2em;
+    width: 24px;
+    text-align: center;
+}
+
+/* Main Content */
+.admin-main {
+    grid-column: 2;
+    margin-left: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+    background: white;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.admin-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header h1 {
+    margin: 0;
+    color: #1a1a2e;
+    font-size: 2em;
+}
+
+.admin-user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-user-info span {
+    color: #666;
+    font-weight: 600;
+}
+
+.btn-report {
+    padding: 10px 20px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-report:hover {
+    background: #219a52;
+}
+
+.btn-reset {
+    padding: 10px 20px;
+    background: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-reset:hover {
+    background: #d68910;
+}
+
+.btn-logout {
+    padding: 10px 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: #d63a25;
+}
+
+.admin-content {
+    padding: 0 30px 30px 30px;
+    flex: 1;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    font-size: 2.5em;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.stat-icon.users {
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.stat-icon.bookings {
+    background: rgba(46, 204, 113, 0.1);
+}
+
+.stat-icon.fleet {
+    background: rgba(241, 196, 15, 0.1);
+}
+
+.stat-icon.revenue {
+    background: rgba(230, 76, 60, 0.1);
+}
+
+.stat-content h3 {
+    margin: 0 0 5px 0;
+    color: #666;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    margin: 0;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: bold;
+    color: #1a1a2e;
+    word-break: break-word;
+}
+
+/* Quick Actions */
+.quick-actions {
+    margin-bottom: 40px;
+}
+
+.quick-actions h2 {
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.action-btn {
+    background: white;
+    border: 2px solid #e74c3c;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #1a1a2e;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: #e74c3c;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(230, 76, 60, 0.2);
+}
+
+.action-btn .icon {
+    font-size: 1.8em;
+}
+
+/* Admin Table */
+.admin-table-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table-section h2 {
+    margin: 0 0 20px 0;
+    color: #1a1a2e;
+    font-size: 1.3em;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table thead {
+    background: #f8f9fa;
+}
+
+.admin-table th {
+    padding: 15px;
+    text-align: left;
+    color: #1a1a2e;
+    font-weight: 700;
+    border-bottom: 2px solid #e74c3c;
+}
+
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #666;
+}
+
+.admin-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+/* ========== LIVE INDICATOR ========== */
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 0.9em;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.pulse {
+    width: 12px;
+    height: 12px;
+    background: #4caf50;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+}
+
+.live-indicator #lastUpdated {
+    margin-left: auto;
+    font-weight: 600;
+}
+
+/* ========== STAT SUBTITLES ========== */
+.stat-subtitle {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 5px;
+    display: block;
+}
+
+/* ========== BOOKING STATUS SECTION ========== */
+.booking-status-section {
+    margin-bottom: 40px;
+}
+
+.booking-status-section h2 {
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.booking-status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.status-card {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-3px);
+}
+
+.status-card.confirmed {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 2px solid #64b5f6;
+}
+
+.status-card.returned {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 2px solid #81c784;
+}
+
+.status-card.cancelled {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    border: 2px solid #e57373;
+}
+
+.status-card.pending {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border: 2px solid #ffd54f;
+}
+
+.status-count {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #1a1a2e;
+}
+
+.status-label {
+    font-weight: 600;
+    margin-top: 5px;
+    color: #333;
+}
+
+.status-desc {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 3px;
+}
+
+/* ========== ACTIVITY FEED ========== */
+.activity-feed-section {
+    margin-bottom: 40px;
+}
+
+.activity-feed-section h2 {
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.activity-feed {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    font-size: 1.4em;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 50%;
+}
+
+.activity-text {
+    flex: 1;
+    color: #333;
+}
+
+.activity-time {
+    font-size: 0.8em;
+    color: #999;
+    white-space: nowrap;
+}
+
+/* ========== DASHBOARD COLUMNS ========== */
+.dashboard-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* ========== BOOKING STATUS BADGES ========== */
+.booking-status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.booking-status.status-confirmed {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.booking-status.status-returned {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.booking-status.status-cancelled {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+/* ========== FLEET OVERVIEW ========== */
+.fleet-overview-section {
+    margin-bottom: 40px;
+}
+
+.fleet-overview-section h2 {
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.fleet-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fleet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.fleet-card.available {
+    border-left: 4px solid #4caf50;
+}
+
+.fleet-card.rented {
+    border-left: 4px solid #f44336;
+}
+
+.fleet-car-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.fleet-car-info {
+    padding: 15px;
+}
+
+.fleet-car-info h4 {
+    margin: 0 0 5px 0;
+    color: #1a1a2e;
+    font-size: 1em;
+}
+
+.fleet-car-info p {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.stock-info {
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.stock-available {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.stock-total {
+    color: #888;
+}
+
+.fleet-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+}
+
+.fleet-status.available {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.fleet-status.rented {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+
+    .nav-item {
+        padding: 10px 15px;
+        white-space: nowrap;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+        border-left: none;
+        border-bottom-color: #e74c3c;
+    }
+
+    .admin-main {
+        margin-left: 0;
+    }
+
+    .admin-header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .admin-table {
+        font-size: 0.9em;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 10px 8px;
+    }
+
+    .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-status-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .fleet-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .live-indicator {
+        flex-wrap: wrap;
+        font-size: 0.8em;
+    }
+
+    .revenue-breakdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .popular-cars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .alerts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== ALERTS SECTION ========== */
+.alerts-section {
+    margin-bottom: 40px;
+}
+
+.alerts-section h2 {
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.alerts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.alert-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.alert-card.overdue {
+    border-left: 4px solid #e74c3c;
+}
+
+.alert-card.low-stock {
+    border-left: 4px solid #f39c12;
+}
+
+.alert-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.alert-header h3 {
+    margin: 0;
+    flex: 1;
+    font-size: 1em;
+    color: #333;
+}
+
+.alert-icon {
+    font-size: 1.3em;
+}
+
+.alert-count {
+    background: #e74c3c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85em;
+}
+
+.alert-body {
+    padding: 15px 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 10px;
+}
+
+.alert-item:last-child {
+    border-bottom: none;
+}
+
+.alert-car {
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.alert-customer {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.alert-overdue-days {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+.alert-stock {
+    font-weight: 600;
+}
+
+.alert-item.out-of-stock .alert-stock {
+    color: #e74c3c;
+}
+
+.alert-item.low .alert-stock {
+    color: #f39c12;
+}
+
+.no-alerts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 30px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-radius: 10px;
+    color: #2e7d32;
+}
+
+.no-alerts .alert-icon {
+    font-size: 2em;
+}
+
+.no-alerts p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ========== REVENUE BREAKDOWN SECTION ========== */
+.revenue-section {
+    margin-bottom: 40px;
+}
+
+.revenue-section h2 {
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.revenue-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.revenue-tab {
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.revenue-tab:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.revenue-tab.active {
+    background: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+}
+
+.revenue-breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.revenue-card {
+    background: white;
+    padding: 20px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.revenue-card:hover {
+    transform: translateY(-3px);
+}
+
+.revenue-card.highlight {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+}
+
+.revenue-card h4 {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.revenue-card.highlight h4 {
+    color: #b0b0b0;
+}
+
+.revenue-amount {
+    font-size: clamp(1rem, 4vw, 1.8rem);
+    font-weight: bold;
+    color: #2e7d32;
+    margin: 0 0 5px 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.revenue-card.highlight .revenue-amount {
+    color: #4caf50;
+}
+
+.revenue-bookings {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.revenue-card.highlight .revenue-bookings {
+    color: #b0b0b0;
+}
+
+/* ========== POPULAR CARS SECTION ========== */
+.popular-cars-section {
+    margin-bottom: 40px;
+}
+
+.popular-cars-section h2 {
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.popular-cars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.popular-car-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.popular-car-card:hover {
+    transform: translateX(5px);
+}
+
+.popular-rank {
+    font-size: 2em;
+    min-width: 50px;
+    text-align: center;
+}
+
+.popular-car-info {
+    flex: 1;
+}
+
+.popular-car-info h4 {
+    margin: 0 0 8px 0;
+    color: #1a1a2e;
+}
+
+.popular-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.85em;
+}
+
+.popular-bookings {
+    color: #666;
+}
+
+.popular-revenue {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.popularity-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.popularity-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e74c3c, #f39c12);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.no-data {
+    text-align: center;
+    padding: 30px;
+    color: #999;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+/* ========== USER MANAGEMENT STYLES ========== */
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-count-badge {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.booking-count {
+    background: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.btn-delete-user {
+    background: #fee;
+    border: 1px solid #fcc;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.btn-delete-user:hover {
+    background: #ffcccc;
+    border-color: #e74c3c;
+    transform: scale(1.1);
+}
+
+/* Delete User Confirmation Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-overlay .modal {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-overlay .modal h2 {
+    margin-top: 0;
+    color: #e74c3c;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.delete-warning {
+    background: #fff8f8;
+    border: 1px solid #ffd4d4;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.delete-warning p {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.user-to-delete {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    margin: 15px 0;
+}
+
+.user-to-delete p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.warning-text {
+    color: #e74c3c !important;
+    font-weight: 500;
+    font-size: 0.9em;
+    margin-top: 15px !important;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-modal-cancel {
+    padding: 12px 25px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-modal-cancel:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.btn-modal-delete {
+    padding: 12px 25px;
+    border: none;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-modal-delete:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* ========== ENHANCED RESPONSIVE DESIGN ========== */
+
+/* High zoom / medium screens (150% zoom on 1920px = ~1280px viewport) */
+@media (max-width: 1280px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .stat-card {
+        padding: 18px;
+        gap: 12px;
+    }
+    
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 2em;
+    }
+    
+    .revenue-breakdown-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+    
+    .revenue-card {
+        padding: 15px 12px;
+    }
+    
+    .revenue-amount {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+    }
+    
+    .fleet-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+}
+
+/* Large tablets and small laptops */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .fleet-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .revenue-breakdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+        gap: 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-item {
+        padding: 10px 15px;
+        white-space: nowrap;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        flex-shrink: 0;
+    }
+
+    .nav-item.active,
+    .nav-item:hover {
+        border-left: none;
+        border-bottom-color: #e74c3c;
+    }
+    
+    .nav-item.logout {
+        margin-top: 0;
+        border-top: none;
+        padding-top: 10px;
+    }
+
+    .admin-main {
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    .admin-header {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+
+    .admin-header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .admin-header h1 {
+        font-size: 1.5em;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 15px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.5em;
+    }
+
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    .admin-table {
+        font-size: 0.85em;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 10px 8px;
+        white-space: nowrap;
+    }
+
+    .dashboard-columns {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .booking-status-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .fleet-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .fleet-card {
+        flex-direction: column;
+    }
+    
+    .fleet-car-image {
+        width: 100%;
+        height: 120px;
+    }
+
+    .live-indicator {
+        flex-wrap: wrap;
+        font-size: 0.8em;
+        gap: 8px;
+    }
+
+    .revenue-breakdown-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .revenue-card {
+        padding: 15px 10px;
+    }
+    
+    .revenue-amount {
+        font-size: clamp(0.9rem, 3vw, 1.4rem);
+        word-break: break-word;
+    }
+
+    .popular-cars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .alerts-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .table-section {
+        padding: 15px;
+        margin: 0 15px 20px;
+    }
+    
+    .section-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .user-actions {
+        flex-wrap: wrap;
+    }
+    
+    .modal-overlay .modal {
+        padding: 20px;
+        margin: 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .modal-actions button {
+        width: 100%;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .sidebar-header {
+        padding: 15px 10px;
+    }
+    
+    .sidebar-header h3 {
+        font-size: 1.2em;
+    }
+    
+    .sidebar-nav {
+        padding: 8px;
+    }
+    
+    .nav-item {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    
+    .icon {
+        font-size: 1em;
+    }
+    
+    .admin-header {
+        padding: 15px 10px;
+    }
+    
+    .admin-header h1 {
+        font-size: 1.3em;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .stat-card {
+        padding: 12px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+    
+    .stat-card .stat-icon {
+        font-size: 1.5em;
+        order: 2;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.3em;
+        margin: 0;
+    }
+    
+    .stat-card p {
+        font-size: 0.8em;
+        margin: 2px 0 0 0;
+    }
+    
+    .stat-change {
+        font-size: 0.75em;
+    }
+
+    .actions-grid {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+
+    .booking-status-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-card {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 12px 15px;
+    }
+
+    .fleet-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .fleet-card {
+        flex-direction: row;
+        padding: 10px;
+    }
+    
+    .fleet-car-image {
+        width: 80px;
+        height: 60px;
+        border-radius: 5px;
+    }
+    
+    .fleet-car-info h4 {
+        font-size: 0.95em;
+    }
+    
+    .fleet-car-info p {
+        font-size: 0.85em;
+    }
+
+    .revenue-breakdown-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .revenue-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 12px 15px;
+    }
+    
+    .revenue-amount {
+        font-size: clamp(0.85rem, 3vw, 1.2rem);
+        word-break: break-word;
+        max-width: 60%;
+    }
+    
+    .popular-car-card {
+        padding: 12px;
+    }
+    
+    .popular-rank {
+        font-size: 1.5em;
+        min-width: 40px;
+    }
+    
+    .popular-car-info h4 {
+        font-size: 0.95em;
+    }
+    
+    .alert-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .table-section {
+        padding: 10px;
+        margin: 0 10px 15px;
+        border-radius: 8px;
+    }
+    
+    .table-section h3 {
+        font-size: 1em;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 8px 6px;
+        font-size: 0.8em;
+    }
+    
+    .dashboard-columns {
+        padding: 0 10px;
+        gap: 15px;
+    }
+    
+    .activity-feed {
+        max-height: 250px;
+    }
+    
+    .activity-item {
+        padding: 8px 10px;
+        font-size: 0.85em;
+    }
+    
+    .live-indicator {
+        font-size: 0.75em;
+        padding: 8px 12px;
+    }
+}
+
+/* Extra small phones (iPhone SE, etc.) */
+@media (max-width: 375px) {
+    .admin-header h1 {
+        font-size: 1.1em;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.1em;
+    }
+    
+    .nav-item {
+        padding: 6px 10px;
+        font-size: 0.85em;
+    }
+    
+    .fleet-card {
+        padding: 8px;
+    }
+    
+    .fleet-car-image {
+        width: 60px;
+        height: 45px;
+    }
+}

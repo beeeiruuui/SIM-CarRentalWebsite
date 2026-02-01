@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - aZoom Car Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><img src="Logo/aZoomCarRental.png" alt="aZoom Car Rental"></a>
+            </div>
+            <nav class="nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rentals.html">Rentals</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="my-bookings.html">My Bookings</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-signin" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <section class="auth-container">
+        <div class="auth-box">
+            <h2>Create Account</h2>
+            <p class="auth-subtitle">Join aZoom for the best car rental experience</p>
+            
+            <!-- User Type Toggle -->
+            <div class="user-type-toggle">
+                <button type="button" class="toggle-btn active" onclick="switchSignupType('customer')">
+                    Customer
+                </button>
+                <button type="button" class="toggle-btn" onclick="switchSignupType('staff')">
+                    Staff
+                </button>
+            </div>
+            
+            <form id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="firstName" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="lastName" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" name="email" placeholder="your@email.com" required>
+                    <small class="email-hint" id="signup-email-hint" style="display: none;">Must use @azoom.mymail.sg</small>
+                </div>
+
+                <!-- Staff-only fields -->
+                <div id="staff-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="staff-id">Staff ID</label>
+                        <input type="text" id="staff-id" name="staffId" placeholder="e.g., STF001">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department">
+                            <option value="">Select Department</option>
+                            <option value="Management">Management</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Customer Service">Customer Service</option>
+                            <option value="Finance">Finance</option>
+                            <option value="IT">IT</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" placeholder="••••••••" required>
+                    <small class="password-hint">At least 8 characters, 1 uppercase, 1 number</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group checkbox">
+                    <label>
+                        <input type="checkbox" id="agree-terms" name="terms" required>
+                        <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html" class="auth-link">Sign in here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>For Renters</h4>
+                    <ul>
+                        <li><a href="rentals.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Our Services</a></li>
+                        <li><a href="index.html#contact">Our Branches</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Branches</h4>
+                    <ul>
+                        <li>Downtown: 123 Electric Ave</li>
+                        <li>Airport: 456 Terminal Rd</li>
+                        <li>Open: Mon-Sun 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 aZoom Car Rental. 100% Electric Fleet. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="unified-auth.js"></script>
+</body>
+</html>

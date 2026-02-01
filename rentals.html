@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentals - aZoom Car Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+    <!-- Header (copied from index) -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><img src="Logo/aZoomCarRental.png" alt="aZoom Car Rental"></a>
+            </div>
+            <nav class="nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rentals.html" class="active">Rentals</a></li>                    <li><a href="index.html#services">Services</a></li>                    <li><a href="my-bookings.html">My Bookings</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-search" id="nav-search">
+                <form id="nav-search-form" onsubmit="event.preventDefault(); handleSearch(document.getElementById('nav-search-input').value)">
+                    <input type="text" id="nav-search-input" placeholder="Search cars, models...">
+                    <button class="btn-search" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-signin" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+    <!-- Filters Section (moved from index) -->
+    <section class="filters">
+        <div class="container">
+            <h2>Find Your Perfect Car</h2>
+            <div class="filter-controls">
+                <div class="price-range-container">
+                    <label for="price-slider">Price Range: $<span id="price-value">0</span> - $<span id="price-value-max">500</span>/day</label>
+                    <input type="range" id="price-slider" class="price-slider" min="0" max="500" value="500">
+                </div>
+                <select id="availability-filter" class="filter-select">
+                    <option value="available">Available</option>
+                    <option value="unavailable">Unavailable</option>
+                    <option value="all">All Cars</option>
+                </select>
+                <select id="sort-filter" class="filter-select">
+                    <option value="">Sort By</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="price-asc">Price (Low to High)</option>
+                    <option value="price-desc">Price (High to Low)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rentals / Featured Cars Section -->
+    <section class="featured-cars" id="rentals">
+        <div class="container">
+            <h2>Our Fleet</h2>
+            <p class="section-description">Browse our collection of premium rental cars</p>
+            
+            <div class="cars-grid" id="cars-container">
+                <!-- Cars will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>For Renters</h4>
+                    <ul>
+                        <li><a href="rentals.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Our Services</a></li>
+                        <li><a href="index.html#contact">Our Branches</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Branches</h4>
+                    <ul>
+                        <li>Downtown: 123 Electric Ave</li>
+                        <li>Airport: 456 Terminal Rd</li>
+                        <li>Open: Mon-Sun 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 aZoom Car Rental. 100% Electric Fleet. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

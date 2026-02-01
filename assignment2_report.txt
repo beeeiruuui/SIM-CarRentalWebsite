@@ -1,0 +1,459 @@
+================================================================================
+                    ISIT207: FRONTEND WEB PROGRAMMING
+                           ASSIGNMENT 2 REPORT
+                         AZoom Car Rental Website
+================================================================================
+
+Student Name: [Your First Name]
+UOW Student Number: [Your UOW Number]
+Date: [Date]
+
+================================================================================
+                        TABLE OF CONTENTS
+================================================================================
+
+1. Introduction
+2. Website Overview and Structure
+3. Web Design Considerations
+4. User Interface (UI) Design Principles
+5. Features and Functionality
+6. Technology Stack
+7. Screen Recording Link
+8. Conclusion
+
+================================================================================
+                        1. INTRODUCTION
+================================================================================
+
+This report presents the web design considerations and implementation details 
+for the AZoom Car Rental website, developed as part of ISIT207 Frontend Web 
+Programming Assignment 2.
+
+AZoom Car Rental is a local electric car rental company that provides 
+environmentally-friendly transportation options. The website aims to provide 
+customers with an intuitive platform to browse available vehicles, make 
+reservations, and manage their bookings online.
+
+The website supports the following business processes:
+- Customer car reservation via credit card only (no cash/PayPal)
+- Vehicle browsing and filtering (9 electric/hybrid vehicles from 3 brands)
+- Flexible rental periods: Daily, Weekly (10% discount), Monthly (20% discount)
+- Two branch locations for pickup/return: Downtown (123 Electric Ave) and Airport (456 Terminal Rd)
+- User account management (customer and staff)
+- My Bookings page for viewing booking history
+- Payment processing with credit card validation
+- Admin dashboard for staff management
+
+================================================================================
+                    2. WEBSITE OVERVIEW AND STRUCTURE
+================================================================================
+
+The website consists of the following pages:
+
+2.1 HOME PAGE (index.html)
+---------------------------
+The landing page introduces AZoom Car Rental with:
+- Hero section with compelling headline and search bar
+- Search functionality that redirects to rentals with results
+- Featured cars preview with CTA to rentals
+- Services section highlighting company benefits (Wide Selection, Best Price, 
+  24/7 Support, Instant Booking)
+- About section describing the company's electric vehicle focus
+- Contact information and footer
+- Consistent navigation: Home, Rentals, Services, My Bookings, About, Contact
+- Footer with quick links: For Renters, Company info, Branch locations
+
+[INSERT SCREENSHOT: Home Page Hero Section]
+[INSERT SCREENSHOT: Home Page Services Section]
+
+2.2 RENTALS PAGE (rentals.html)
+-------------------------------
+Displays the complete electric car fleet with:
+- Search functionality with URL parameter support
+- Price range filter (slider)
+- Availability filter
+- Sorting options (name A-Z/Z-A, price low-high/high-low)
+- Car cards with images, brand, model, price, and booking buttons
+- 9 electric/hybrid vehicles from 3 brands: Honda, Toyota, Tesla
+
+[INSERT SCREENSHOT: Rentals Page with Filters]
+
+2.3 BOOKING PAGE (booking.html)
+-------------------------------
+Allows customers to reserve a vehicle:
+- Car details display with image
+- Rental period selection (Daily/Weekly/Monthly)
+- Automatic discount calculation (10% weekly, 20% monthly)
+- Pickup and Return branch selection (Downtown, Airport)
+- Date and time picker for pickup
+- Real-time price calculation display
+
+[INSERT SCREENSHOT: Booking Form]
+
+2.4 PAYMENT PAGE (payment.html)
+-------------------------------
+Secure payment processing page:
+- Order summary with car details, dates, and pricing
+- Discount display when applicable
+- Credit card only payment (no cash or PayPal per business requirements)
+- Card number formatting with automatic spacing
+- Expiry date (MM/YY) and CVV validation
+- Payment confirmation and redirect to success page
+
+[INSERT SCREENSHOT: Payment Page]
+
+2.5 BOOKING SUCCESS PAGE (booking-success.html)
+-----------------------------------------------
+Confirmation page after successful payment:
+- Booking confirmation number
+- Complete booking summary (car, dates, locations, total)
+- Navigation to My Bookings or continue browsing
+
+[INSERT SCREENSHOT: Booking Success Page]
+
+2.6 MY BOOKINGS PAGE (my-bookings.html)
+---------------------------------------
+Customer booking history page:
+- List of all user's bookings
+- Booking details (car, dates, pickup/return locations, status)
+- Booking status indicators (Confirmed, Completed, Cancelled)
+- Cancel booking functionality for future bookings
+
+[INSERT SCREENSHOT: My Bookings Page]
+
+2.7 LOGIN PAGE (login.html)
+---------------------------
+User authentication with:
+- Customer/Staff toggle
+- Email and password fields
+- Remember me option
+- Link to signup page
+
+[INSERT SCREENSHOT: Login Page]
+
+2.8 SIGNUP PAGE (signup.html)
+-----------------------------
+New user registration:
+- Full name, email, password fields
+- Terms and conditions agreement
+- Link to login page
+
+[INSERT SCREENSHOT: Signup Page]
+
+2.9 ADMIN DASHBOARD (admin-dashboard.html)
+------------------------------------------
+Staff management interface:
+- Statistics overview (users, bookings, fleet, revenue)
+- Quick action buttons
+- Recent bookings table with booking details
+- Revenue calculation from completed bookings
+- Sidebar navigation
+
+[INSERT SCREENSHOT: Admin Dashboard]
+
+2.10 PROFILE PAGE (profile.html)
+--------------------------------
+User account management for logged-in customers.
+
+[INSERT SCREENSHOT: Profile Page]
+
+================================================================================
+                    3. WEB DESIGN CONSIDERATIONS
+================================================================================
+
+3.1 VISUAL DESIGN
+-----------------
+Color Scheme:
+- Primary: Dark navy blue (#1a1a2e, #16213e) - Conveys professionalism and trust
+- Accent: Bright blue (#007bff) - For call-to-action buttons
+- Background: Light gray (#f8f9fa) - Clean, modern appearance
+- Text: Dark gray (#333) - Excellent readability
+
+Typography:
+- Font Family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+- Clean, modern sans-serif fonts for readability
+- Hierarchical sizing for headings (h1 > h2 > h3)
+- Line height of 1.6 for comfortable reading
+
+3.2 LAYOUT DESIGN
+-----------------
+- Fixed header for consistent navigation across all pages
+- Maximum width container (1200px) for optimal reading
+- CSS Grid and Flexbox for responsive layouts
+- Consistent spacing using CSS clamp() for fluid design
+- Card-based design for car listings and information display
+- Consistent footer across all pages with three columns:
+  * For Renters: Book Now, My Bookings
+  * Company: About Us, Our Services, Our Branches
+  * Our Branches: Downtown (123 Electric Ave), Airport (456 Terminal Rd), 
+    Operating hours (Mon-Sun 8AM - 8PM)
+- Social media links in footer (Facebook, Instagram, Twitter)
+
+3.3 RESPONSIVE DESIGN
+---------------------
+The website is fully responsive and adapts to:
+- Desktop screens (1200px+)
+- Tablets (768px - 1199px)
+- Mobile devices (below 768px)
+
+Key responsive features:
+- Hamburger menu for mobile navigation
+- Flexible grid layouts that stack on smaller screens
+- Fluid typography using clamp() function
+- Touch-friendly button sizes on mobile
+
+================================================================================
+                    4. USER INTERFACE (UI) DESIGN PRINCIPLES
+================================================================================
+
+4.1 CONSISTENCY
+---------------
+- Uniform header and footer across all pages
+- Consistent button styles and hover effects
+- Same color scheme throughout the website
+- Standardized form field styling
+
+4.2 VISUAL HIERARCHY
+--------------------
+- Large, attention-grabbing hero sections
+- Clear section headings
+- Important elements (CTA buttons) stand out with contrasting colors
+- Proper use of whitespace to group related content
+
+4.3 FEEDBACK & INTERACTIVITY
+----------------------------
+- Hover effects on buttons and links
+- Form validation messages
+- Loading states for dynamic content
+- Success/error messages for user actions
+
+4.4 ACCESSIBILITY CONSIDERATIONS
+--------------------------------
+- Semantic HTML elements (header, nav, main, section, footer)
+- Alt text for images
+- Proper label associations for form inputs
+- Sufficient color contrast for text readability
+- Keyboard-navigable interface
+
+4.5 USER-CENTERED DESIGN
+------------------------
+- Clear call-to-action buttons
+- Intuitive navigation structure
+- Minimal steps to complete a booking
+- Visible search and filter options
+- Informative car cards with essential details
+
+================================================================================
+                    5. FEATURES AND FUNCTIONALITY
+================================================================================
+
+5.1 NAVIGATION
+--------------
+- Fixed header that remains visible while scrolling
+- Consistent navigation across all pages: Home, Rentals, Services, My Bookings, 
+  About, Contact
+- Smooth scroll to anchor sections on homepage
+- Active state indication for current page
+- Mobile-responsive hamburger menu
+- Clickable logo that returns to homepage
+
+5.2 CAR BROWSING & SEARCH
+-------------------------
+- Dynamic car listing loaded from data source (9 electric/hybrid vehicles)
+- Real-time search functionality with URL parameter support
+- Homepage search redirects to rentals page with results
+- Price range slider filter
+- Availability filter (Available/Unavailable/All)
+- Sort options (Name A-Z, Name Z-A, Price Low-High, Price High-Low)
+- Vehicle brands: Honda, Toyota, Tesla
+
+5.3 BOOKING SYSTEM
+------------------
+- Step-by-step booking process
+- Car selection with details display
+- Rental period selection:
+  * Daily (standard rate)
+  * Weekly (10% discount)
+  * Monthly (20% discount)
+- Two branch locations for pickup and return:
+  * Downtown Branch - 123 Electric Ave, City Center
+  * Airport Branch - 456 Terminal Rd, Airport Plaza
+- Date and time picker for pickup
+- Real-time price calculation with discount display
+
+5.4 PAYMENT PROCESSING
+----------------------
+- Order summary review with car and booking details
+- Discount information display
+- Credit card only payment (per business requirement - no cash/PayPal)
+- Credit card form with validation:
+  * Card number formatting (auto-spacing every 4 digits)
+  * Expiry date validation (MM/YY format)
+  * CVV validation (3-4 digits)
+  * Cardholder name
+- Payment confirmation with booking reference
+- Redirect to success page with booking summary
+
+5.5 MY BOOKINGS
+---------------
+- Customer booking history display
+- Booking cards showing:
+  * Car details (brand, model)
+  * Rental period and dates
+  * Pickup and return locations
+  * Total price and any discounts
+  * Booking status
+- Cancel booking functionality for upcoming bookings
+- Login required to access
+
+5.6 USER AUTHENTICATION
+-----------------------
+- Customer and Staff login differentiation
+- Email/password authentication
+- Session management using localStorage
+- Secure password fields
+- Remember me functionality
+- Staff access to admin dashboard
+
+5.7 ADMIN DASHBOARD
+-------------------
+- Statistics cards (Users, Bookings, Fleet, Revenue)
+- Revenue calculated from completed bookings
+- Quick action buttons
+- Recent bookings management table
+- Staff-only access control
+
+================================================================================
+                        6. TECHNOLOGY STACK
+================================================================================
+
+6.1 FRONTEND TECHNOLOGIES
+-------------------------
+- HTML5: Semantic markup and structure
+- CSS3: Styling, animations, and responsive design
+- JavaScript (ES6+): Interactivity and dynamic functionality
+
+6.2 EXTERNAL LIBRARIES
+----------------------
+- None (vanilla JavaScript implementation)
+
+6.3 DATA MANAGEMENT
+-------------------
+- data.js: Vehicle inventory data and car display functions (9 electric/hybrid vehicles)
+- localStorage: Client-side data persistence:
+  * azoom_users: Customer account data
+  * azoom_staff: Staff account data
+  * azoom_bookings: Booking records with full details
+  * stock_[carName]: Individual car stock tracking
+
+6.4 CAR INVENTORY
+-----------------
+The website features 9 electric/hybrid vehicles from 3 major brands:
+- Honda (4 cars):
+  * Honda E Electric Advance ($55/day) - Electric
+  * Honda Jazz E HEV ($50/day) - Hybrid
+  * Honda Super-ONE EV ($65/day) - Electric
+  * Honda ZR-V E HEV ($70/day) - Hybrid
+- Tesla (2 cars):
+  * Tesla Model 3 ($95/day) - Electric
+  * Tesla Model Y ($105/day) - Electric
+- Toyota (3 cars):
+  * Toyota bZ4X ($78/day) - Electric
+  * Toyota Proace City Electric ($60/day) - Electric
+  * Toyota Vios Full Hybrid ($55/day) - Hybrid
+
+6.5 IMAGE ASSETS
+----------------
+All car images are stored locally in the CarsForRent folder with 4 angles per car:
+- Front view
+- Side view
+- Rear view
+- Interior view
+
+Additional assets organized in folders:
+- Logo/: Company logo (aZoomCarRental.png)
+- Wallpaper/: Background image (backgroundWallpaper.jpg)
+
+6.6 STYLING APPROACH
+--------------------
+- Custom CSS with organized sections
+- CSS Variables potential for theming
+- Mobile-first responsive design
+- Separate CSS files for specific pages:
+  * styles.css - Main stylesheet
+  * auth.css - Authentication pages
+  * booking.css - Booking page
+  * payment.css - Payment page
+  * admin-dashboard.css - Admin interface
+
+================================================================================
+                    7. SCREEN RECORDING LINK
+================================================================================
+
+Video Demonstration Link:
+[INSERT YOUR GOOGLE DRIVE LINK HERE]
+
+The screen recording demonstrates:
+1. Homepage navigation and features (hero, services, about, contact sections)
+2. Using the homepage search bar to search for cars
+3. Browsing cars on the Rentals page
+4. Using filters (price, availability) and search functionality
+5. Complete booking process flow with rental period and branch selection
+6. Payment page walkthrough with credit card validation
+7. Booking success confirmation page
+8. Viewing booking history on My Bookings page
+9. User login/signup process
+10. Admin dashboard features (staff login)
+
+Duration: [X minutes]
+
+================================================================================
+                        8. CONCLUSION
+================================================================================
+
+The AZoom Car Rental website successfully implements a user-friendly interface 
+for electric car rental services. The design prioritizes:
+
+- Clean, professional visual aesthetics
+- Intuitive navigation and user flow
+- Responsive design for all devices
+- Clear information presentation
+- Efficient booking process with rental period discounts
+
+The website meets the business requirements of AZoom Car Rental by providing:
+- Online car browsing and reservation (9 electric/hybrid vehicles)
+- Credit card only payment processing (as per business requirement)
+- Flexible rental periods: Daily, Weekly (10% off), Monthly (20% off)
+- Two branch locations: Downtown (123 Electric Ave) and Airport (456 Terminal Rd)
+- Customer account management with booking history (My Bookings)
+- Staff administrative functions via Admin Dashboard
+
+Key Assignment Requirements Implemented:
+- Electric/hybrid vehicle focus (9 cars from Honda, Toyota, Tesla)
+- Credit card only payment method
+- Multiple rental periods with discount structure
+- Branch location selection for pickup/return
+- Booking history page for customers
+
+Future enhancements could include:
+- Backend database integration (replacing localStorage)
+- Real-time availability updates
+- Email confirmation system
+- Customer review and rating system
+- Multi-language support
+- Additional branch locations
+
+================================================================================
+                        DEPLOYED WEBSITE URL
+================================================================================
+
+Website URL: [INSERT YOUR DEPLOYED WEBSITE URL HERE]
+
+Source Files (Google Drive): [INSERT YOUR GOOGLE DRIVE LINK HERE]
+
+================================================================================
+                            END OF REPORT
+================================================================================
+
+Note: Replace all [INSERT...] placeholders with actual content before submission.
+File naming convention: ISIT207_[FirstName]_[UOWNo].pdf

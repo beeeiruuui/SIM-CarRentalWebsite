@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - aZoom Car Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3>aZoom Admin</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="javascript:void(0)" class="nav-item active" onclick="scrollToSection('top'); setActiveNav(this)">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="javascript:void(0)" class="nav-item" onclick="scrollToSection('usersManagement'); setActiveNav(this)">
+                    <span class="icon">👥</span> Users
+                </a>
+                <a href="javascript:void(0)" class="nav-item" onclick="scrollToSection('fleetOverview'); setActiveNav(this)">
+                    <span class="icon">🚗</span> Fleet
+                </a>
+                <a href="javascript:void(0)" class="nav-item" onclick="scrollToSection('bookingsSection'); setActiveNav(this)">
+                    <span class="icon">📅</span> Bookings
+                </a>
+                <a href="javascript:void(0)" class="nav-item" onclick="scrollToSection('revenueSection'); setActiveNav(this)">
+                    <span class="icon">💰</span> Revenue
+                </a>
+                <a href="javascript:void(0)" class="nav-item logout" onclick="adminLogout()">
+                    <span class="icon">🚪</span> Sign Out
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <header class="admin-header">
+                <div class="admin-header-top">
+                    <h1>Dashboard</h1>
+                    <div class="admin-user-info">
+                        <span id="staffName"></span>
+                        <button class="btn-report" onclick="generateMonthlyReport()">📊 Generate Report</button>
+                        <button class="btn-reset" onclick="resetAllData()">🔄 Reset Data</button>
+                        <button class="btn-logout" onclick="adminLogout()">Sign Out</button>
+                    </div>
+                </div>
+            </header>
+
+            <main class="admin-content">
+                <!-- Live Activity Indicator -->
+                <div class="live-indicator">
+                    <span class="pulse"></span>
+                    <span>Live Dashboard - Auto-refreshing every second</span>
+                    <span id="lastUpdated"></span>
+                </div>
+
+                <!-- Stats Cards -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon users">👥</div>
+                        <div class="stat-content">
+                            <h3>Total Users</h3>
+                            <p class="stat-number" id="totalUsers">0</p>
+                            <span class="stat-subtitle" id="newUsersToday">+0 today</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bookings">📅</div>
+                        <div class="stat-content">
+                            <h3>Total Bookings</h3>
+                            <p class="stat-number" id="totalBookings">0</p>
+                            <span class="stat-subtitle" id="activeBookings">0 active</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon fleet">🚗</div>
+                        <div class="stat-content">
+                            <h3>Fleet Status</h3>
+                            <p class="stat-number" id="activeFleet">0</p>
+                            <span class="stat-subtitle" id="fleetStatus">0 available / 0 rented</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon revenue">💰</div>
+                        <div class="stat-content">
+                            <h3>Total Revenue</h3>
+                            <p class="stat-number" id="revenue">$0</p>
+                            <span class="stat-subtitle" id="todayRevenue">$0 today</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Booking Status Overview -->
+                <section class="booking-status-section">
+                    <h2>📊 Booking Status Overview</h2>
+                    <div class="booking-status-grid">
+                        <div class="status-card confirmed">
+                            <div class="status-count" id="confirmedCount">0</div>
+                            <div class="status-label">Confirmed</div>
+                            <div class="status-desc">Active rentals</div>
+                        </div>
+                        <div class="status-card returned">
+                            <div class="status-count" id="returnedCount">0</div>
+                            <div class="status-label">Returned</div>
+                            <div class="status-desc">Completed</div>
+                        </div>
+                        <div class="status-card cancelled">
+                            <div class="status-count" id="cancelledCount">0</div>
+                            <div class="status-label">Cancelled</div>
+                            <div class="status-desc">Cancelled bookings</div>
+                        </div>
+                        <div class="status-card pending">
+                            <div class="status-count" id="pendingPickup">0</div>
+                            <div class="status-label">Pending Pickup</div>
+                            <div class="status-desc">Waiting for customer</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ALERTS SECTION - Overdue Rentals & Low Stock -->
+                <section class="alerts-section" id="alertsSection">
+                    <h2>⚠️ Alerts & Notifications</h2>
+                    <div class="alerts-container">
+                        <!-- Overdue Rentals Alert -->
+                        <div class="alert-card overdue" id="overdueAlert" style="display: none;">
+                            <div class="alert-header">
+                                <span class="alert-icon">🚨</span>
+                                <h3>Overdue Rentals</h3>
+                                <span class="alert-count" id="overdueCount">0</span>
+                            </div>
+                            <div class="alert-body" id="overdueList">
+                                <!-- Overdue bookings will be listed here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Low Stock Alert -->
+                        <div class="alert-card low-stock" id="lowStockAlert" style="display: none;">
+                            <div class="alert-header">
+                                <span class="alert-icon">📦</span>
+                                <h3>Low Stock Warning</h3>
+                                <span class="alert-count" id="lowStockCount">0</span>
+                            </div>
+                            <div class="alert-body" id="lowStockList">
+                                <!-- Low stock cars will be listed here -->
+                            </div>
+                        </div>
+                        
+                        <!-- No Alerts Message -->
+                        <div class="no-alerts" id="noAlertsMessage">
+                            <span class="alert-icon">✅</span>
+                            <p>All systems operational. No alerts at this time.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- REVENUE BREAKDOWN SECTION -->
+                <section class="revenue-section" id="revenueSection">
+                    <h2>💰 Revenue Breakdown</h2>
+                    <div class="revenue-tabs">
+                        <button class="revenue-tab active" onclick="showRevenuePeriod('daily')">Daily</button>
+                        <button class="revenue-tab" onclick="showRevenuePeriod('weekly')">Weekly</button>
+                        <button class="revenue-tab" onclick="showRevenuePeriod('monthly')">Monthly</button>
+                    </div>
+                    <div class="revenue-breakdown-grid">
+                        <div class="revenue-card">
+                            <h4>Today's Revenue</h4>
+                            <p class="revenue-amount" id="revenueTodayCard">$0.00</p>
+                            <span class="revenue-bookings" id="bookingsTodayCard">0 bookings</span>
+                        </div>
+                        <div class="revenue-card">
+                            <h4>This Week</h4>
+                            <p class="revenue-amount" id="revenueWeekCard">$0.00</p>
+                            <span class="revenue-bookings" id="bookingsWeekCard">0 bookings</span>
+                        </div>
+                        <div class="revenue-card">
+                            <h4>This Month</h4>
+                            <p class="revenue-amount" id="revenueMonthCard">$0.00</p>
+                            <span class="revenue-bookings" id="bookingsMonthCard">0 bookings</span>
+                        </div>
+                        <div class="revenue-card highlight">
+                            <h4>All Time</h4>
+                            <p class="revenue-amount" id="revenueAllTimeCard">$0.00</p>
+                            <span class="revenue-bookings" id="bookingsAllTimeCard">0 bookings</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- POPULAR CARS SECTION -->
+                <section class="popular-cars-section">
+                    <h2>🏆 Most Popular Cars</h2>
+                    <div class="popular-cars-grid" id="popularCarsGrid">
+                        <!-- Popular cars will be populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Recent Activity Feed -->
+                <section class="activity-feed-section">
+                    <h2>🔔 Recent Activity</h2>
+                    <div class="activity-feed" id="activityFeed">
+                        <div class="activity-item">
+                            <span class="activity-icon">⏳</span>
+                            <span class="activity-text">Loading activities...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Two Column Layout -->
+                <div class="dashboard-columns">
+                    <!-- Recent Bookings Table -->
+                    <section class="admin-table-section" id="bookingsSection">
+                        <h2>📅 Recent Bookings</h2>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Customer</th>
+                                    <th>Car</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsTableBody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: #999;">No bookings yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <!-- Users Table -->
+                    <section class="admin-table-section" id="usersManagement">
+                        <div class="section-header-row">
+                            <h2>👥 User Management</h2>
+                            <span class="user-count-badge" id="userCountBadge">0 users</span>
+                        </div>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Bookings</th>
+                                    <th>Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: #999;">No users yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+
+                <!-- Fleet Overview -->
+                <section class="fleet-overview-section" id="fleetOverview">
+                    <h2>🚗 Fleet Overview (Real-time)</h2>
+                    <div class="fleet-grid" id="fleetGrid">
+                        <!-- Fleet cards will be populated by JS -->
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Delete User Confirmation Modal -->
+    <div class="modal-overlay" id="deleteUserModal">
+        <div class="modal">
+            <h2>⚠️ Delete User Account</h2>
+            <div class="delete-warning">
+                <p>Are you sure you want to delete this user account?</p>
+                <div class="user-to-delete" id="userToDeleteInfo"></div>
+                <p class="warning-text">⚠️ This action cannot be undone. The user's booking history will be preserved for records.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="closeDeleteModal()">Cancel</button>
+                <button class="btn-modal-delete" onclick="confirmDeleteUser()">Delete Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

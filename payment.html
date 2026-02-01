@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - aZoom Car Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="payment.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><img src="Logo/aZoomCarRental.png" alt="aZoom Car Rental"></a>
+            </div>
+            <nav class="nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rentals.html">Rentals</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="my-bookings.html">My Bookings</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-signin" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <section class="payment-container">
+        <div class="payment-wrapper">
+            <!-- Booking Summary -->
+            <div class="booking-summary-box">
+                <h3 class="section-title">Order Summary</h3>
+                
+                <div id="booking-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">Vehicle</span>
+                        <span class="summary-value" id="summary-car">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Fuel Type</span>
+                        <span class="summary-value" id="summary-fuel">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Color</span>
+                        <span class="summary-value" id="summary-color">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Rental Period</span>
+                        <span class="summary-value" id="summary-period">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Pickup Branch</span>
+                        <span class="summary-value" id="summary-pickup">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Return Branch</span>
+                        <span class="summary-value" id="summary-return">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Pickup Date</span>
+                        <span class="summary-value" id="summary-date">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Pickup Time</span>
+                        <span class="summary-value" id="summary-time">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Rental Days</span>
+                        <span class="summary-value" id="summary-days">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Daily Rate</span>
+                        <span class="summary-value" id="summary-rate">-</span>
+                    </div>
+                    <div class="summary-item" id="discount-row" style="display: none;">
+                        <span class="summary-label">Discount</span>
+                        <span class="summary-value" id="summary-discount" style="color: #27ae60;">-$0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Payment Method</span>
+                        <span class="summary-value" id="summary-payment-method">-</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span class="summary-label">Total Amount</span>
+                        <span class="summary-value" id="summary-total">$0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Form -->
+            <div class="payment-form-box">
+                <h3 class="section-title">Credit Card Payment</h3>
+                
+                <form id="paymentForm">
+                    <div class="card-icon">💳</div>
+
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" name="card-name" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <div class="security-info">
+                        Your payment information is encrypted and secure
+                    </div>
+
+                    <button type="submit" class="btn-submit">Complete Payment</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>For Renters</h4>
+                    <ul>
+                        <li><a href="rentals.html">Book Now</a></li>
+                        <li><a href="my-bookings.html">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Our Services</a></li>
+                        <li><a href="index.html#contact">Our Branches</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Our Branches</h4>
+                    <ul>
+                        <li>Downtown: 123 Electric Ave</li>
+                        <li>Airport: 456 Terminal Rd</li>
+                        <li>Open: Mon-Sun 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 aZoom Car Rental. 100% Electric Fleet. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Format card number with spaces
+        document.getElementById('card-number').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Only allow numbers in CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Populate booking summary on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            var car = getUrlParameter('car');
+            var days = getUrlParameter('days');
+            var color = getUrlParameter('color');
+            var dateFrom = getUrlParameter('date-from');
+            var time = getUrlParameter('time');
+            var paymentMethod = getUrlParameter('payment');
+            var period = getUrlParameter('period');
+            var duration = getUrlParameter('duration');
+            var pickupBranch = getUrlParameter('pickup');
+            var returnBranch = getUrlParameter('return');
+            var total = getUrlParameter('total');
+            var discount = getUrlParameter('discount');
+
+            // Get car data
+            const carData = getCarByName(car);
+            const fuelType = carData ? (carData.fuelType || 'Electric') : 'Electric';
+            const dailyRate = carData ? carData.price : 0;
+
+            // Format period display
+            let periodDisplay = period ? period.charAt(0).toUpperCase() + period.slice(1) : 'Daily';
+            periodDisplay += ` (${duration} ${period === 'daily' ? 'day(s)' : period === 'weekly' ? 'week(s)' : 'month(s)'})`;
+
+            document.getElementById('summary-car').textContent = car;
+            document.getElementById('summary-fuel').textContent = fuelType;
+            document.getElementById('summary-color').textContent = color;
+            document.getElementById('summary-period').textContent = periodDisplay;
+            document.getElementById('summary-pickup').textContent = pickupBranch ? pickupBranch.split(' - ')[0] : '-';
+            document.getElementById('summary-return').textContent = returnBranch ? returnBranch.split(' - ')[0] : '-';
+            document.getElementById('summary-date').textContent = dateFrom;
+            document.getElementById('summary-time').textContent = time;
+            document.getElementById('summary-days').textContent = days + ' day(s)';
+            document.getElementById('summary-rate').textContent = '$' + dailyRate;
+            document.getElementById('summary-payment-method').textContent = paymentMethod;
+            document.getElementById('summary-total').textContent = '$' + (total || (dailyRate * parseInt(days || 1)));
+
+            // Show discount if applicable
+            if (discount && parseFloat(discount) > 0) {
+                document.getElementById('discount-row').style.display = 'flex';
+                document.getElementById('summary-discount').textContent = '-$' + discount;
+            }
+        });
+
+        // Handle payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Validate card information
+            const cardNumber = document.getElementById('card-number').value.replace(/\s/g, '');
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+            
+            // Basic validation
+            if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+                alert('Please enter a valid 16-digit card number');
+                return;
+            }
+            if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+                alert('Please enter expiry in MM/YY format');
+                return;
+            }
+            if (cvv.length !== 3 || isNaN(cvv)) {
+                alert('Please enter a valid 3-digit CVV');
+                return;
+            }
+            
+            // Build redirect URL with all booking parameters
+            const car = getUrlParameter('car');
+            const days = getUrlParameter('days');
+            const color = getUrlParameter('color');
+            const dateFrom = getUrlParameter('date-from');
+            const time = getUrlParameter('time');
+            const paymentMethod = getUrlParameter('payment');
+            const pickupBranch = getUrlParameter('pickup');
+            const returnBranch = getUrlParameter('return');
+            const total = getUrlParameter('total');
+            const discount = getUrlParameter('discount');
+            
+            // Redirect to success page with booking details
+            const successUrl = `booking-success.html?car=${encodeURIComponent(car)}&days=${days}&color=${encodeURIComponent(color)}&date-from=${encodeURIComponent(dateFrom)}&time=${encodeURIComponent(time)}&payment=${encodeURIComponent(paymentMethod)}&pickup=${encodeURIComponent(pickupBranch)}&return=${encodeURIComponent(returnBranch)}&total=${total}&discount=${discount}`;
+            
+            window.location.href = successUrl;
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
