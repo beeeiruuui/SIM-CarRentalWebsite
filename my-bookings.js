@@ -412,7 +412,8 @@ function exportBookingsPDF() {
             <div class="footer">
                 <p>Thank you for choosing aZoom Car Rental!</p>
                 <p>🌱 Together we're driving towards a greener future.</p>
-                <p>Contact: info@azoomcarrental.sg | Ang Mo Kio: +65 6555 1234 | Jurong West: +65 6555 5678 | Tampines: +65 6555 9012</p>
+                <p>Pickup: Storhub, 615 Lorong 4 Toa Payoh | Return: Ang Mo Kio, Jurong West, Tampines</p>
+                <p>Contact: info@azoomcarrental.sg | +65 6555 0000</p>
             </div>
             
             <div class="no-print" style="text-align: center; margin-top: 30px;">

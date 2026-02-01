@@ -1,3 +1,14 @@
+// Check if user is logged in
+function checkLoginRequired() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    if (!currentUser.email) {
+        alert('Please sign in to book a car. Guest checkout is not available.');
+        window.location.href = 'login.html';
+        return false;
+    }
+    return true;
+}
+
 // Get URL parameters
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -42,6 +53,11 @@ function updateDurationHint(periodType) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Check login before allowing booking
+    if (!checkLoginRequired()) {
+        return;
+    }
+
     const carName = getUrlParameter('car');
     const cars = getCars();
     const car = cars.find(c => c.name === carName);

@@ -170,8 +170,16 @@ function handleSearch(query) {
     window.location.href = `rentals.html?search=${encodeURIComponent(query.trim())}`;
 }
 
-// Redirect to booking page
+// Redirect to booking page (requires login)
 function rentCar(carName) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    if (!currentUser.email) {
+        alert('Please sign in to book a car.');
+        // Store the intended car so we can redirect after login
+        sessionStorage.setItem('pendingBookingCar', carName);
+        window.location.href = 'login.html';
+        return;
+    }
     window.location.href = `booking.html?car=${encodeURIComponent(carName)}`;
 }
 
