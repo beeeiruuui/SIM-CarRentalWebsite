@@ -284,6 +284,7 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
 }
 
 .admin-table-section h2 {
@@ -295,6 +296,7 @@
 .admin-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 500px;
 }
 
 .admin-table thead {
@@ -307,6 +309,7 @@
     color: #1a1a2e;
     font-weight: 700;
     border-bottom: 2px solid #e74c3c;
+    white-space: nowrap;
 }
 
 .admin-table td {
@@ -1602,4 +1605,407 @@
         width: 60px;
         height: 45px;
     }
+}
+
+/* ========== CAR INSPECTION SECTION ========== */
+.inspection-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.inspection-section h2 {
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+.inspection-section .section-description {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.inspection-pending,
+.inspection-completed {
+    margin-top: 20px;
+}
+
+.inspection-pending h3,
+.inspection-completed h3 {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+.btn-inspect {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-inspect:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
+.btn-mark-returned {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-right: 5px;
+}
+
+.btn-mark-returned:hover {
+    background: #219a52;
+}
+
+/* Inline Inspection Options */
+.inspection-options {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-no-damage-small {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-no-damage-small:hover {
+    background: #219a52;
+    transform: scale(1.02);
+}
+
+.btn-damage-small {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-damage-small:hover {
+    background: #c0392b;
+    transform: scale(1.02);
+}
+
+.btn-cancel-small {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+
+.btn-cancel-small:hover {
+    background: #7f8c8d;
+}
+
+/* Inspection Modal Styles */
+.inspection-modal {
+    max-width: 500px;
+}
+
+.inspection-details {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.inspection-details p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.inspection-details strong {
+    color: #1a1a2e;
+}
+
+.inspection-info-grid {
+    display: grid;
+    gap: 8px;
+}
+
+.inspection-choice {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.inspection-question {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.inspection-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-no-damage {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-no-damage:hover {
+    background: #219a52;
+    transform: translateY(-2px);
+}
+
+.btn-damage-found {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-damage-found:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+.damage-form {
+    padding: 10px 0;
+}
+
+.damage-form .form-group {
+    margin-bottom: 15px;
+}
+
+.damage-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.damage-form label .required {
+    color: #e74c3c;
+}
+
+.damage-form textarea,
+.damage-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.damage-form textarea:focus,
+.damage-form input:focus {
+    outline: none;
+    border-color: #e74c3c;
+}
+
+.damage-summary {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.damage-summary p {
+    margin: 0;
+    color: #856404;
+    font-size: 0.9em;
+}
+
+.btn-send-damage-bill {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-send-damage-bill:hover {
+    background: #c0392b;
+}
+
+#inspectionForm .form-group {
+    margin-bottom: 15px;
+}
+
+#inspectionForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+#inspectionForm select,
+#inspectionForm textarea,
+#inspectionForm input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+#inspectionForm select:focus,
+#inspectionForm textarea:focus,
+#inspectionForm input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.form-hint {
+    font-size: 0.8em;
+    color: #999;
+    margin-top: 5px;
+    display: block;
+}
+
+.inspection-summary {
+    background: #1a1a2e;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-row.total {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 12px;
+    border-top: 2px solid #e74c3c;
+    margin-top: 5px;
+}
+
+.summary-row.total span:last-child {
+    color: #e74c3c;
+}
+
+.btn-modal-confirm {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-modal-confirm:hover {
+    background: #219a52;
+}
+
+/* Payment status badges */
+.payment-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.payment-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.payment-status.paid {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* Condition badges */
+.condition-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.condition-excellent {
+    background: #d4edda;
+    color: #155724;
+}
+
+.condition-good {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.condition-damaged {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.condition-severe {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.damage-charge {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.no-damage {
+    color: #27ae60;
 }

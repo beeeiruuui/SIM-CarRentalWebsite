@@ -1,0 +1,809 @@
+.bookings-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.bookings-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.bookings-header h1 {
+    font-size: 2em;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+.bookings-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    border: 2px solid #3498db;
+    background: white;
+    color: #3498db;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: #3498db;
+    color: white;
+}
+
+.booking-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-left: 4px solid #27ae60;
+}
+
+.booking-card.past {
+    border-left-color: #95a5a6;
+    opacity: 0.85;
+}
+
+.booking-card.cancelled {
+    border-left-color: #e74c3c;
+    opacity: 0.7;
+}
+
+.booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.booking-id {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.booking-status {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-completed {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.booking-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.booking-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.booking-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-action {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-return {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-return:hover {
+    background: #219a52;
+}
+
+.btn-cancel {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #c0392b;
+}
+
+.btn-modify {
+    background: #3498db;
+    color: white;
+}
+
+.btn-modify:hover {
+    background: #2980b9;
+}
+
+.btn-extend {
+    background: #9b59b6;
+    color: white;
+}
+
+.btn-extend:hover {
+    background: #8e44ad;
+}
+
+.btn-export {
+    background: #1a1a2e;
+    color: white;
+}
+
+.btn-export:hover {
+    background: #16213e;
+}
+
+.no-bookings {
+    text-align: center;
+    padding: 50px;
+    color: #666;
+}
+
+.no-bookings h3 {
+    margin-bottom: 15px;
+}
+
+.electric-badge {
+    display: inline-block;
+    background: #27ae60;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    margin-left: 8px;
+}
+
+/* Damage Payment Section */
+.damage-payment-section {
+    margin-bottom: 30px;
+}
+
+.damage-alert {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+    border: 2px solid #ffc107;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.damage-alert h3 {
+    color: #856404;
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+.damage-alert p {
+    color: #856404;
+    margin: 0;
+}
+
+.damage-request-card {
+    background: white;
+    border: 2px solid #e74c3c;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.15);
+}
+
+.damage-request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.damage-request-id {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.damage-amount {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.damage-info {
+    margin-bottom: 20px;
+}
+
+.damage-info p {
+    margin: 8px 0;
+    color: #333;
+}
+
+.damage-info strong {
+    color: #1a1a2e;
+}
+
+.damage-description {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+    margin: 15px 0;
+}
+
+.damage-description p {
+    margin: 0;
+    font-style: italic;
+    color: #666;
+}
+
+.btn-pay-damage {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-pay-damage:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 {
+    margin: 0 0 20px 0;
+    color: #1a1a2e;
+}
+
+.modal-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.modal-form input,
+.modal-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-modal-save {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-modal-cancel {
+    background: #e0e0e0;
+    color: #333;
+}
+
+/* Damage Payment Modal Styles */
+.damage-payment-details {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.damage-payment-details p {
+    margin: 8px 0;
+    color: #333;
+}
+
+.damage-payment-details .damage-total {
+    font-size: 1.2em;
+    color: #e74c3c;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+#damagePaymentForm .form-group {
+    margin-bottom: 15px;
+}
+
+#damagePaymentForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+#damagePaymentForm input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+#damagePaymentForm input:focus {
+    outline: none;
+    border-color: #e74c3c;
+}
+
+#damagePaymentForm .form-row {
+    display: flex;
+    gap: 15px;
+}
+
+#damagePaymentForm .form-row .form-group {
+    flex: 1;
+}
+
+.btn-pay-now {
+    background: #e74c3c;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-pay-now:hover {
+    background: #c0392b;
+}
+
+.price-preview {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.price-preview h4 {
+    margin: 0 0 10px 0;
+    color: #1a1a2e;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.price-total {
+    font-weight: bold;
+    color: #27ae60;
+    font-size: 1.2em;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-account-settings {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+}
+
+.btn-account-settings:hover {
+    background: linear-gradient(135deg, #495057, #343a40);
+}
+
+/* Account Settings Modal Styles */
+.account-settings-modal {
+    max-width: 500px;
+}
+
+.account-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.account-info p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-info strong {
+    color: #666;
+}
+
+.settings-section h3 {
+    margin: 0 0 15px 0;
+    color: #1a1a2e;
+    font-size: 1em;
+}
+
+.settings-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-settings {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-settings:first-child {
+    background: #e8f4fd;
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.btn-settings:first-child:hover {
+    background: #3498db;
+    color: white;
+}
+
+.btn-settings.btn-danger {
+    background: #fee;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+.btn-settings.btn-danger:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+/* Delete Account Modal Styles */
+.delete-account-modal {
+    max-width: 500px;
+}
+
+.delete-warning-box {
+    background: #fff5f5;
+    border: 2px solid #fed7d7;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.warning-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #c53030;
+    margin-bottom: 10px !important;
+}
+
+.delete-consequences {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.delete-consequences li {
+    padding: 8px 0;
+    color: #666;
+    border-bottom: 1px solid #fee;
+}
+
+.confirm-delete-section {
+    margin: 20px 0;
+}
+
+.confirm-delete-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.confirm-delete-section input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.confirm-delete-section input:focus {
+    border-color: #e74c3c;
+    outline: none;
+}
+
+.confirm-help {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 5px;
+}
+
+.btn-modal-delete {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.btn-modal-delete:not(:disabled) {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    cursor: pointer;
+}
+
+.btn-modal-delete:not(:disabled):hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+}
+
+/* ========== RESPONSIVE DESIGN FOR MY BOOKINGS ========== */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .bookings-container {
+        padding: 15px;
+        margin: 20px auto;
+    }
+    
+    .bookings-header h1 {
+        font-size: 1.5em;
+    }
+    
+    .bookings-tabs {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .tab-btn {
+        padding: 10px 18px;
+        font-size: 0.9em;
+        flex: 1;
+        min-width: 100px;
+    }
+    
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .header-actions button {
+        width: 100%;
+    }
+    
+    .booking-card {
+        padding: 18px;
+    }
+    
+    .booking-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .booking-body {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .booking-actions {
+        flex-wrap: wrap;
+    }
+    
+    .btn-action {
+        flex: 1;
+        min-width: 120px;
+        padding: 10px 12px;
+        font-size: 0.85em;
+    }
+    
+    .modal {
+        width: 95%;
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .modal h2 {
+        font-size: 1.2em;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .modal-actions button {
+        width: 100%;
+    }
+    
+    .price-preview {
+        padding: 12px;
+    }
+    
+    .price-row {
+        font-size: 0.9em;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .bookings-container {
+        padding: 10px;
+        margin: 10px auto;
+    }
+    
+    .bookings-header {
+        margin-bottom: 20px;
+    }
+    
+    .bookings-header h1 {
+        font-size: 1.3em;
+    }
+    
+    .bookings-header p {
+        font-size: 0.9em;
+    }
+    
+    .bookings-tabs {
+        gap: 8px;
+    }
+    
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 0.85em;
+    }
+    
+    .booking-card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .car-info h3 {
+        font-size: 1.1em;
+    }
+    
+    .booking-detail {
+        font-size: 0.9em;
+    }
+    
+    .booking-detail strong {
+        display: block;
+        margin-bottom: 3px;
+    }
+    
+    .btn-action {
+        padding: 10px;
+        font-size: 0.8em;
+        min-width: 100px;
+    }
+    
+    .account-settings-modal,
+    .delete-account-modal {
+        max-width: 100%;
+    }
+    
+    .settings-actions {
+        gap: 8px;
+    }
+    
+    .btn-settings {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    
+    .delete-warning-box {
+        padding: 15px;
+    }
+    
+    .delete-consequences li {
+        padding: 6px 0;
+        font-size: 0.9em;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 375px) {
+    .bookings-header h1 {
+        font-size: 1.2em;
+    }
+    
+    .tab-btn {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+    
+    .booking-card {
+        padding: 12px;
+    }
+    
+    .btn-action {
+        padding: 8px;
+        font-size: 0.75em;
+    }
+}

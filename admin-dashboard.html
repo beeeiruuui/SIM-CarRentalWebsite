@@ -29,6 +29,9 @@
                 <a href="javascript:void(0)" class="nav-item" onclick="scrollToSection('bookingsSection'); setActiveNav(this)">
                     <span class="icon">📅</span> Bookings
                 </a>
+                <a href="javascript:void(0)" class="nav-item" onclick="scrollToSection('inspectionSection'); setActiveNav(this)">
+                    <span class="icon">🔍</span> Inspections
+                </a>
                 <a href="javascript:void(0)" class="nav-item" onclick="scrollToSection('revenueSection'); setActiveNav(this)">
                     <span class="icon">💰</span> Revenue
                 </a>
@@ -226,11 +229,12 @@
                                     <th>Car</th>
                                     <th>Status</th>
                                     <th>Total</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="bookingsTableBody">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; color: #999;">No bookings yet</td>
+                                    <td colspan="6" style="text-align: center; color: #999;">No bookings yet</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -267,6 +271,56 @@
                     <h2>🚗 Fleet Overview (Real-time)</h2>
                     <div class="fleet-grid" id="fleetGrid">
                         <!-- Fleet cards will be populated by JS -->
+                    </div>
+                </section>
+
+                <!-- Car Inspection & Damage Billing Section -->
+                <section class="inspection-section" id="inspectionSection">
+                    <h2>🔍 Car Inspection & Damage Billing</h2>
+                    <p class="section-description">Inspect returned vehicles. If damage is found, a payment request will be sent to the customer.</p>
+                    
+                    <!-- Pending Inspections -->
+                    <div class="inspection-pending">
+                        <h3>Awaiting Inspection</h3>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Customer</th>
+                                    <th>Car</th>
+                                    <th>Returned On</th>
+                                    <th>Rental Paid</th>
+                                    <th>Inspection</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingInspectionsBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: #999;">No cars awaiting inspection</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Completed Inspections -->
+                    <div class="inspection-completed">
+                        <h3>Recent Inspections</h3>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Customer</th>
+                                    <th>Car</th>
+                                    <th>Result</th>
+                                    <th>Damage Charge</th>
+                                    <th>Payment Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="completedInspectionsBody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: #999;">No completed inspections</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
             </main>
