@@ -55,13 +55,13 @@ function resetAllData() {
         
         if (!activeWarning) return;
         
-        // Partial reset - keep active rentals and their customers
+        // Partial reset - keep active rentals
         const confirmPartial = confirm(
             '🔶 PARTIAL RESET\n\n' +
             'This will:\n' +
-            '✅ KEEP active rentals and their customers\n' +
-            '❌ Clear returned/cancelled bookings\n' +
-            '❌ Clear users with no active rentals\n\n' +
+            '✅ KEEP active rentals\n' +
+            '✅ KEEP all user accounts (manage users manually)\n' +
+            '❌ Clear returned/cancelled bookings\n\n' +
             'Click OK to proceed with partial reset.'
         );
         
@@ -78,44 +78,34 @@ function resetAllData() {
         'All cars have been returned. Safe to reset!\n\n' +
         'This will clear:\n' +
         '• All bookings (returned/cancelled)\n' +
-        '• All users\n' +
         '• Reset car stock levels\n\n' +
-        'Click OK to proceed with full reset.'
+        '⚠️ User accounts will NOT be deleted.\n' +
+        'Manage users manually in User Management section.\n\n' +
+        'Click OK to proceed with reset.'
     );
     
     if (!confirmReset) return;
     
     // Double confirmation for safety
-    const doubleConfirm = confirm('🔴 FINAL CONFIRMATION\n\nClick OK to permanently reset all data.\nClick Cancel to abort.');
+    const doubleConfirm = confirm('🔴 FINAL CONFIRMATION\n\nClick OK to permanently reset booking data.\nUser accounts will be preserved.\nClick Cancel to abort.');
     if (!doubleConfirm) return;
     
     // Full reset
     performFullReset();
 }
 
-// Partial reset - keeps active rentals
+// Partial reset - keeps active rentals and all users
 function performPartialReset(activeRentals) {
-    // Get current data
-    const users = JSON.parse(localStorage.getItem('azoom_users') || '[]');
-    
-    // Get emails of users with active rentals
-    const activeUserEmails = [...new Set(activeRentals.map(b => b.userEmail))];
-    
-    // Keep only users with active rentals
-    const usersToKeep = users.filter(u => activeUserEmails.includes(u.email));
-    
-    // Save active rentals back
+    // Save active rentals back (keep only active, remove completed/cancelled)
     localStorage.setItem('azoom_bookings', JSON.stringify(activeRentals));
     
-    // Save users with active rentals
-    localStorage.setItem('azoom_users', JSON.stringify(usersToKeep));
-    
     // Don't reset stock - active rentals still have cars
+    // Don't touch users - manage manually
     
     alert(
         '✅ Partial reset completed!\n\n' +
         `• Kept ${activeRentals.length} active rental(s)\n` +
-        `• Kept ${usersToKeep.length} customer(s) with active rentals\n` +
+        '• All user accounts preserved\n' +
         '• Cleared completed/cancelled bookings\n' +
         '• Stock levels preserved\n\n' +
         'The dashboard will now refresh.'
@@ -124,15 +114,15 @@ function performPartialReset(activeRentals) {
     location.reload();
 }
 
-// Full reset - clears everything
+// Full reset - clears bookings and stock, but NOT users
 function performFullReset() {
     // Clear bookings
     localStorage.removeItem('azoom_bookings');
     
-    // Clear users
-    localStorage.removeItem('azoom_users');
+    // Clear damage requests
+    localStorage.removeItem('azoom_damage_requests');
     
-    // Clear all stock keys
+    // Clear all stock keys (reset to default)
     const allKeys = Object.keys(localStorage);
     allKeys.forEach(key => {
         if (key.startsWith('stock_')) {
@@ -140,7 +130,9 @@ function performFullReset() {
         }
     });
     
-    alert('✅ Full reset completed!\n\nAll data has been cleared.\nThe dashboard will now refresh.');
+    // Do NOT clear users - manage manually via User Management
+    
+    alert('✅ Reset completed!\n\n• All bookings cleared\n• Stock levels reset\n• User accounts preserved\n\nManage users manually in User Management section.\nThe dashboard will now refresh.');
     
     location.reload();
 }

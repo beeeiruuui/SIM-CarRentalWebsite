@@ -215,6 +215,8 @@ body {
     background-position: center -300px;
     padding: 180px 20px 140px;
     text-align: center;
+    margin-top: -80px;
+    padding-top: 260px;
 }
 
 .hero-content h1 {
@@ -680,6 +682,32 @@ body {
 
 .contact-item p {
     color: #666;
+}
+
+/* Company Info Grid */
+.company-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.company-info-item h3 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #1a1a2e;
+}
+
+.company-info-item p {
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    .company-info-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ========== FOOTER ========== */
