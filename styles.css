@@ -212,11 +212,14 @@ body {
     background-image: linear-gradient(rgba(81, 77, 77, 0.6), rgba(88, 85, 85, 0.6)), url('Wallpaper/backgroundWallpaper.jpg');
     background-blend-mode: multiply;
     background-size: cover;
-    background-position: center -300px;
-    padding: 180px 20px 140px;
+    background-position: center 50%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px;
     text-align: center;
     margin-top: -80px;
-    padding-top: 260px;
 }
 
 .hero-content h1 {
