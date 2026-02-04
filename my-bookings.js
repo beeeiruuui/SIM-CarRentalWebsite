@@ -50,7 +50,7 @@ function updateBookingStatus(bookingId, status) {
 function returnCar(bookingId) {
     if (confirm('Are you sure you want to mark this car as returned?')) {
         updateBookingStatus(bookingId, 'returned');
-        alert('Car has been marked as returned. Thank you for choosing aZoom!');
+        alert('Car has been marked as returned. Thank you for choosing AZoom!');
     }
 }
 
@@ -278,7 +278,7 @@ function exportBookingsPDF() {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>aZoom Car Rental - Booking History</title>
+            <title>AZoom Car Rental - Booking History</title>
             <style>
                 body {
                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -356,7 +356,7 @@ function exportBookingsPDF() {
         </head>
         <body>
             <div class="header">
-                <h1>⚡ aZoom Car Rental</h1>
+                <h1>⚡ AZoom Car Rental</h1>
                 <p>100% Electric Fleet | Booking History Report</p>
                 <p>Generated: ${new Date().toLocaleString()}</p>
             </div>
@@ -410,7 +410,7 @@ function exportBookingsPDF() {
             </table>
             
             <div class="footer">
-                <p>Thank you for choosing aZoom Car Rental!</p>
+                <p>Thank you for choosing AZoom Car Rental!</p>
                 <p>🌱 Together we're driving towards a greener future.</p>
                 <p>Pickup: Storhub, 615 Lorong 4 Toa Payoh | Return: Ang Mo Kio, Jurong West, Tampines</p>
                 <p>Contact: info@azoomcarrental.sg | +65 6555 0000</p>
@@ -586,7 +586,7 @@ function confirmDeleteAccount() {
     closeModal('deleteAccountModal');
     
     // Show success message and redirect
-    alert('Your account has been successfully deleted. We\'re sorry to see you go!\n\nThank you for using aZoom Car Rental.');
+    alert('Your account has been successfully deleted. We\'re sorry to see you go!\n\nThank you for using AZoom Car Rental.');
     window.location.href = 'index.html';
 }
 
