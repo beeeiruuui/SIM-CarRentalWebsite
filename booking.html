@@ -22,9 +22,15 @@
                     <li><a href="index.html#services">Services</a></li>
                     <li><a href="my-bookings.html">My Bookings</a></li>
                     <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="index.html#company-info">Company Information</a></li>
                 </ul>
             </nav>
+            <div class="nav-search" id="nav-search">
+                <form id="nav-search-form" onsubmit="event.preventDefault(); handleSearch(document.getElementById('nav-search-input').value)">
+                    <input type="text" id="nav-search-input" placeholder="Search cars, models...">
+                    <button class="btn-search" type="submit">Search</button>
+                </form>
+            </div>
             <div class="auth-buttons" id="auth-buttons">
                 <button class="btn-signin" onclick="window.location.href='login.html'">Sign In</button>
                 <button class="btn-signup" onclick="window.location.href='signup.html'">Sign Up</button>
