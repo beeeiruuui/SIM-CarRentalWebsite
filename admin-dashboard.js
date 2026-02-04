@@ -4,6 +4,10 @@
 // Track which booking is currently being inspected (to preserve state during refresh)
 let activeInspectionId = null;
 
+// Track last activity time and previous data for change detection
+let lastActivityTime = Date.now();
+let previousDataSnapshot = { users: 0, bookings: 0, bookingsData: '' };
+
 // Check if staff is logged in on page load
 document.addEventListener('DOMContentLoaded', function() {
     checkAdminAuth();
@@ -12,9 +16,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // Real-time updates every 3 seconds (increased to avoid interrupting inspections)
     setInterval(loadDashboardData, 3000);
     
+    // Update "seconds ago" display every second
+    setInterval(updateLastActivityDisplay, 1000);
+    
     // Listen for storage changes from other tabs
     window.addEventListener('storage', loadDashboardData);
 });
+
+// Update the "X seconds ago" display
+function updateLastActivityDisplay() {
+    const lastUpdatedElement = document.getElementById('lastUpdated');
+    if (lastUpdatedElement) {
+        const secondsAgo = Math.floor((Date.now() - lastActivityTime) / 1000);
+        if (secondsAgo < 60) {
+            lastUpdatedElement.textContent = `Last activity: ${secondsAgo}s ago`;
+        } else if (secondsAgo < 3600) {
+            const minutes = Math.floor(secondsAgo / 60);
+            lastUpdatedElement.textContent = `Last activity: ${minutes}m ago`;
+        } else {
+            const hours = Math.floor(secondsAgo / 3600);
+            lastUpdatedElement.textContent = `Last activity: ${hours}h ago`;
+        }
+    }
+}
 
 // Check if admin/staff is authenticated
 function checkAdminAuth() {
@@ -648,11 +672,25 @@ function loadDashboardData() {
     // ========== CAR INSPECTIONS ==========
     loadInspections();
     
-    // ========== LAST UPDATED TIMESTAMP ==========
-    const lastUpdatedElement = document.getElementById('lastUpdated');
-    if (lastUpdatedElement) {
-        lastUpdatedElement.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+    // ========== DETECT CHANGES & UPDATE ACTIVITY TIMER ==========
+    const currentSnapshot = {
+        users: users.length,
+        bookings: bookings.length,
+        bookingsData: JSON.stringify(bookings.map(b => ({ id: b.id, status: b.status })))
+    };
+    
+    // Check if data has changed (new user, new booking, status change, etc.)
+    if (currentSnapshot.users !== previousDataSnapshot.users ||
+        currentSnapshot.bookings !== previousDataSnapshot.bookings ||
+        currentSnapshot.bookingsData !== previousDataSnapshot.bookingsData) {
+        
+        // Data changed! Reset the activity timer
+        lastActivityTime = Date.now();
+        previousDataSnapshot = currentSnapshot;
     }
+    
+    // Update the display immediately
+    updateLastActivityDisplay();
 }
 
 // Update Booking Status Cards
