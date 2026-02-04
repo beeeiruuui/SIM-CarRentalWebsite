@@ -212,7 +212,7 @@ function handleSignup(e) {
         
         // Auto login
         localStorage.setItem('currentUser', JSON.stringify(newUser));
-        alert('Account created successfully! Welcome to Zoom Car Rental.');
+        alert('Account created successfully! Welcome to AZoom Car Rental.');
         window.location.href = 'index.html';
         
     } else {
