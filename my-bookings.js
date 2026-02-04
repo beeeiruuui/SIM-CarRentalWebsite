@@ -31,6 +31,7 @@ function updateBookingStatus(bookingId, status) {
         if (status === 'returned') {
             booking.returnDate = new Date().toISOString().split('T')[0];
             booking.returnTime = new Date().toLocaleTimeString();
+            booking.returnedAt = new Date().toISOString(); // For admin dashboard compatibility
             // Increase stock when car is returned
             updateCarStock(booking.car || booking.carName, 1);
         }

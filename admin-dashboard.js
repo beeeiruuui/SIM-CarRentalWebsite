@@ -1210,9 +1210,12 @@ function updatePendingInspectionsTable(inspections) {
     }
     
     tbody.innerHTML = inspections.map(booking => {
+        // Check for returnedAt (from admin) or returnDate (from customer)
         const returnedDate = booking.returnedAt 
             ? new Date(booking.returnedAt).toLocaleDateString() 
-            : 'N/A';
+            : booking.returnDate 
+                ? new Date(booking.returnDate).toLocaleDateString()
+                : 'N/A';
         
         // Check if this booking is actively being inspected
         const isActiveInspection = String(activeInspectionId) === String(booking.id);
