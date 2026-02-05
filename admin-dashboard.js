@@ -597,7 +597,7 @@ function loadDashboardData() {
         activeBookingsElement.textContent = `${confirmedBookings.length} active`;
     }
     
-    // Fleet Status - Available vs Rented (based on actual stock)
+    // Fleet Status - Available vs Rented (based on actual stock AND pickup datetime)
     const activeFleetElement = document.getElementById('activeFleet');
     const fleetStatusElement = document.getElementById('fleetStatus');
     
@@ -612,13 +612,33 @@ function loadDashboardData() {
         availableStock += currentStock; // Current available
     });
     
+    // Count confirmed bookings by pickup datetime status
+    const now = new Date();
+    
+    // Actually rented: pickup datetime has passed (customer has the car)
+    const actuallyRented = confirmedBookings.filter(b => {
+        const pickupDateTime = getPickupDateTime(b);
+        return pickupDateTime <= now;
+    }).length;
+    
+    // Pending pickup: pickup datetime hasn't passed yet (car reserved but not picked up)
+    const pendingPickupCount = confirmedBookings.filter(b => {
+        const pickupDateTime = getPickupDateTime(b);
+        return pickupDateTime > now;
+    }).length;
+    
     const rentedCount = totalStock - availableStock;
     
     if (activeFleetElement) {
         activeFleetElement.textContent = `${availableStock}/${totalStock}`;
     }
     if (fleetStatusElement) {
-        fleetStatusElement.textContent = `${availableStock} available / ${rentedCount} rented`;
+        // Show breakdown: available / actually rented (pickup passed) / pending pickup
+        if (pendingPickupCount > 0) {
+            fleetStatusElement.textContent = `${availableStock} available / ${actuallyRented} rented / ${pendingPickupCount} pending`;
+        } else {
+            fleetStatusElement.textContent = `${availableStock} available / ${rentedCount} rented`;
+        }
     }
     
     // Revenue Calculations
@@ -693,12 +713,26 @@ function loadDashboardData() {
     updateLastActivityDisplay();
 }
 
+// Helper function to create DateTime from booking's date and time
+function getPickupDateTime(booking) {
+    const pickupDate = booking.pickupDate || '';
+    const pickupTime = booking.pickupTime || '00:00';
+    // Create datetime: "2026-02-05" + "T" + "10:00" -> "2026-02-05T10:00"
+    return new Date(`${pickupDate}T${pickupTime}`);
+}
+
 // Update Booking Status Cards
 function updateBookingStatusCards(bookings, today) {
+    const now = new Date(); // Current date AND time
     const confirmed = bookings.filter(b => b.status === 'confirmed');
     const returned = bookings.filter(b => b.status === 'returned');
     const cancelled = bookings.filter(b => b.status === 'cancelled');
-    const pendingPickup = confirmed.filter(b => b.pickupDate >= today);
+    
+    // Pending Pickup: confirmed bookings where pickup date+time is in the future
+    const pendingPickup = confirmed.filter(b => {
+        const pickupDateTime = getPickupDateTime(b);
+        return pickupDateTime > now; // Pickup datetime hasn't passed yet
+    });
     
     const confirmedCountEl = document.getElementById('confirmedCount');
     const returnedCountEl = document.getElementById('returnedCount');
