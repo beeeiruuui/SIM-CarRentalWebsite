@@ -1031,15 +1031,15 @@ function loadBookingsTable(bookings) {
     const tableBody = document.getElementById('bookingsTableBody');
     if (!tableBody) return;
     
-    // Get recent 5 bookings
-    const recentBookings = bookings.slice(-5).reverse();
+    // Get all bookings (most recent first)
+    const allBookings = bookings.slice().reverse();
     
-    if (recentBookings.length === 0) {
+    if (allBookings.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No bookings yet</td></tr>';
         return;
     }
     
-    tableBody.innerHTML = recentBookings.map(booking => {
+    tableBody.innerHTML = allBookings.map(booking => {
         const statusClass = booking.status === 'confirmed' ? 'status-confirmed' : 
                            booking.status === 'returned' ? 'status-returned' : 'status-cancelled';
         
