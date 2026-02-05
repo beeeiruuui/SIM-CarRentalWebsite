@@ -69,7 +69,7 @@ const localCars = [
             { angle: 'Interior', image: 'CarsForRent/Tesla Model 3/interior.jpg' }
         ]
     },
-    {
+    /*{
         name: 'Tesla Model Y',
         price: 105,
         stock: 4,
@@ -81,7 +81,7 @@ const localCars = [
             { angle: 'Rear', image: 'CarsForRent/Tesla Model Y/back.jpeg' },
             { angle: 'Interior', image: 'CarsForRent/Tesla Model Y/interior.jpeg' }
         ]
-    },*/
+    },
     // Toyota - 3 cars
     {
         name: 'Toyota bZ4X',
