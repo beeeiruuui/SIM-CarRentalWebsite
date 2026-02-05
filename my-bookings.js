@@ -413,7 +413,7 @@ function exportBookingsPDF() {
             <div class="footer">
                 <p>Thank you for choosing AZoom Car Rental!</p>
                 <p>🌱 Together we're driving towards a greener future.</p>
-                <p>Pickup: Storhub, 615 Lorong 4 Toa Payoh | Return: Ang Mo Kio, Jurong West, Tampines</p>
+                <p>Storhub Management Pte Ltd, 615 Lorong 4 Toa Payoh</p>
                 <p>Contact: info@azoomcarrental.sg | +65 6555 0000</p>
             </div>
             
