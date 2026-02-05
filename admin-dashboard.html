@@ -221,23 +221,25 @@
                     <!-- Recent Bookings Table -->
                     <section class="admin-table-section" id="bookingsSection">
                         <h2>📅 Recent Bookings</h2>
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Booking ID</th>
-                                    <th>Customer</th>
-                                    <th>Car</th>
-                                    <th>Status</th>
-                                    <th>Total</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bookingsTableBody">
-                                <tr>
-                                    <td colspan="6" style="text-align: center; color: #999;">No bookings yet</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroll-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer</th>
+                                        <th>Car</th>
+                                        <th>Status</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookingsTableBody">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: #999;">No bookings yet</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
 
                     <!-- Users Table -->
@@ -246,23 +248,25 @@
                             <h2>👥 Customer Management</h2>
                             <span class="user-count-badge" id="userCountBadge">0</span>
                         </div>
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>User ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Bookings</th>
-                                    <th>Joined</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="usersTableBody">
-                                <tr>
-                                    <td colspan="6" style="text-align: center; color: #999;">No customers yet</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroll-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Bookings</th>
+                                        <th>Joined</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: #999;">No customers yet</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
 
                     <!-- Admin/Staff Table -->
@@ -271,23 +275,25 @@
                             <h2>🛡️ Admin Management</h2>
                             <span class="admin-count-badge" id="adminCountBadge">0</span>
                         </div>
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Staff ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Department</th>
-                                    <th>Joined</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminTableBody">
-                                <tr>
-                                    <td colspan="6" style="text-align: center; color: #999;">No admins yet</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroll-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Staff ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Department</th>
+                                        <th>Joined</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminTableBody">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: #999;">No admins yet</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                 </div>
 
@@ -307,45 +313,49 @@
                     <!-- Pending Inspections -->
                     <div class="inspection-pending">
                         <h3>Awaiting Inspection</h3>
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Booking ID</th>
-                                    <th>Customer</th>
-                                    <th>Car</th>
-                                    <th>Returned On</th>
-                                    <th>Rental Paid</th>
-                                    <th>Inspection</th>
-                                </tr>
-                            </thead>
-                            <tbody id="pendingInspectionsBody">
-                                <tr>
-                                    <td colspan="6" style="text-align: center; color: #999;">No cars awaiting inspection</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroll-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer</th>
+                                        <th>Car</th>
+                                        <th>Returned On</th>
+                                        <th>Rental Paid</th>
+                                        <th>Inspection</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pendingInspectionsBody">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: #999;">No cars awaiting inspection</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Completed Inspections -->
                     <div class="inspection-completed">
                         <h3>Recent Inspections</h3>
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>Booking ID</th>
-                                    <th>Customer</th>
-                                    <th>Car</th>
-                                    <th>Result</th>
-                                    <th>Damage Charge</th>
-                                    <th>Payment Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="completedInspectionsBody">
-                                <tr>
-                                    <td colspan="6" style="text-align: center; color: #999;">No completed inspections</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroll-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer</th>
+                                        <th>Car</th>
+                                        <th>Result</th>
+                                        <th>Damage Charge</th>
+                                        <th>Payment Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="completedInspectionsBody">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: #999;">No completed inspections</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
             </main>
