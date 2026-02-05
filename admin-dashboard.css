@@ -295,7 +295,7 @@
 
 /* Scrollable table container */
 .table-scroll-container {
-    max-height: 450px;
+    max-height: 550px;
     overflow-y: auto;
     border: 1px solid #eee;
     border-radius: 8px;
