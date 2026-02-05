@@ -412,9 +412,9 @@ function exportBookingsPDF() {
             
             <div class="footer">
                 <p>Thank you for choosing AZoom Car Rental!</p>
-                <p>🌱 Together we're driving towards a greener future.</p>
-                <p>Storhub Management Pte Ltd, 615 Lorong 4 Toa Payoh</p>
-                <p>Contact: info@azoomcarrental.sg | +65 6555 0000</p>
+                <p>🌱 100% Electric Fleet - Driving Towards a Greener Future</p>
+                <p>🚗 Storhub, 615 Lorong 4 Toa Payoh</p>
+                <p>📞 +65 8682 8785 | ✉️ info@azoomcarrental.sg</p>
             </div>
             
             <div class="no-print" style="text-align: center; margin-top: 30px;">
