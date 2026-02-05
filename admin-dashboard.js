@@ -1158,11 +1158,10 @@ function updateFleetOverview(cars, bookings) {
     
     // Show ALL cars with their actual stock
     fleetGrid.innerHTML = cars.map(car => {
-        // Get actual stock from localStorage
-        const stockKey = 'stock_' + car.name;
-        const storedStock = localStorage.getItem(stockKey);
-        const currentStock = storedStock !== null ? parseInt(storedStock) : car.stock;
-        const originalStock = car.stock;
+        // car.stock is current stock from localStorage (via getCars)
+        // car.originalStock is the original stock from data.js
+        const currentStock = car.stock;
+        const originalStock = car.originalStock || car.stock;
         const rentedCount = originalStock - currentStock;
         
         const isAvailable = currentStock > 0;
