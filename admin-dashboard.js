@@ -597,23 +597,24 @@ function loadDashboardData() {
         activeBookingsElement.textContent = `${confirmedBookings.length} active`;
     }
     
-    // Fleet Status - Available vs Rented (based on actual stock AND pickup datetime)
+    // Fleet Status - Available vs Rented (based on pickup datetime, not stock)
     const activeFleetElement = document.getElementById('activeFleet');
     const fleetStatusElement = document.getElementById('fleetStatus');
     
-    // Calculate total stock from cars data
+    // Calculate total stock from cars data (original capacity)
     let totalStock = 0;
-    let storedAvailableStock = 0; // This is reduced immediately when booking is made
     cars.forEach(car => {
-        const stockKey = 'stock_' + car.name;
-        const storedStock = localStorage.getItem(stockKey);
-        const currentStock = storedStock !== null ? parseInt(storedStock) : car.stock;
-        totalStock += car.stock; // Original total capacity
-        storedAvailableStock += currentStock; // Current stored available (reduced by all bookings)
+        totalStock += car.stock;
     });
     
     // Count confirmed bookings by pickup datetime status
     const now = new Date();
+    
+    // Actually rented: pickup datetime has passed (customer has the car)
+    const actuallyRented = confirmedBookings.filter(b => {
+        const pickupDateTime = getPickupDateTime(b);
+        return pickupDateTime <= now;
+    }).length;
     
     // Pending pickup: pickup datetime hasn't passed yet (car reserved but not picked up)
     // These cars are still physically at the shop!
@@ -622,15 +623,9 @@ function loadDashboardData() {
         return pickupDateTime > now;
     }).length;
     
-    // Actually rented: pickup datetime has passed (customer has the car)
-    const actuallyRented = confirmedBookings.filter(b => {
-        const pickupDateTime = getPickupDateTime(b);
-        return pickupDateTime <= now;
-    }).length;
-    
-    // Real available = stored stock + pending (since pending cars are still here)
-    // This corrects the display to show cars that are physically available
-    const realAvailable = storedAvailableStock + pendingPickupCount;
+    // Real available = total stock - actually rented (cars that left the shop)
+    // Pending bookings don't reduce availability since car is still here
+    const realAvailable = totalStock - actuallyRented;
     
     if (activeFleetElement) {
         // Show real availability: cars physically at the shop
