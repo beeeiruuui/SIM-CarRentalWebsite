@@ -1033,6 +1033,7 @@ function loadBookingsTable(bookings) {
     
     // Get all bookings (most recent first)
     const allBookings = bookings.slice().reverse();
+    const now = new Date();
     
     if (allBookings.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No bookings yet</td></tr>';
@@ -1040,14 +1041,26 @@ function loadBookingsTable(bookings) {
     }
     
     tableBody.innerHTML = allBookings.map(booking => {
-        const statusClass = booking.status === 'confirmed' ? 'status-confirmed' : 
-                           booking.status === 'returned' ? 'status-returned' : 'status-cancelled';
-        
+        // Determine display status based on pickup time for confirmed bookings
+        let displayStatus = booking.status;
+        let statusClass = '';
         let actionBtn = '-';
+        
         if (booking.status === 'confirmed') {
-            // Confirmed = car is out, show "Mark Returned" button
-            actionBtn = `<button class="btn-mark-returned" onclick="markAsReturned('${booking.id}')" title="Customer returned the car">Return</button>`;
+            const pickupDateTime = getPickupDateTime(booking);
+            if (pickupDateTime > now) {
+                // Pickup time hasn't passed - pending pickup
+                displayStatus = 'pending pickup';
+                statusClass = 'status-pending';
+                actionBtn = `<button class="btn-cancel" onclick="cancelBooking('${booking.id}')" title="Cancel this booking">Cancel</button>`;
+            } else {
+                // Pickup time passed - car is out
+                displayStatus = 'confirmed';
+                statusClass = 'status-confirmed';
+                actionBtn = `<button class="btn-mark-returned" onclick="markAsReturned('${booking.id}')" title="Customer returned the car">Return</button>`;
+            }
         } else if (booking.status === 'returned') {
+            statusClass = 'status-returned';
             // Returned = check if inspected
             if (booking.inspection) {
                 // Inspected
@@ -1059,6 +1072,7 @@ function loadBookingsTable(bookings) {
                 actionBtn = `<button class="btn-inspect" onclick="scrollToInspectionSection()" title="Go to inspection section">🔍 Inspect</button>`;
             }
         } else if (booking.status === 'cancelled') {
+            statusClass = 'status-cancelled';
             // Cancelled = check if refunded
             if (booking.refunded) {
                 actionBtn = `<span class="condition-badge condition-excellent">💰 Refunded</span>`;
@@ -1072,7 +1086,7 @@ function loadBookingsTable(bookings) {
                 <td>#${booking.id || 'N/A'}</td>
                 <td>${booking.userName || booking.userEmail || 'Guest'}</td>
                 <td>${booking.car || 'N/A'}</td>
-                <td><span class="booking-status ${statusClass}">${booking.status || 'pending'}</span></td>
+                <td><span class="booking-status ${statusClass}">${displayStatus}</span></td>
                 <td>$${parseFloat(booking.finalBill || booking.total || 0).toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
                 <td>${actionBtn}</td>
             </tr>
@@ -1664,6 +1678,39 @@ function markAsReturned(bookingId) {
     // Refresh dashboard
     loadDashboardData();
     alert('✅ Car marked as returned! Please proceed to inspect the vehicle.');
+}
+
+// Cancel booking (for pending pickup bookings only)
+function cancelBooking(bookingId) {
+    if (!confirm('Cancel this booking?\n\nThe booking will be marked as cancelled and require a refund.')) return;
+    
+    const bookings = JSON.parse(localStorage.getItem('azoom_bookings') || '[]');
+    const bookingIndex = bookings.findIndex(b => String(b.id) === String(bookingId));
+    
+    if (bookingIndex === -1) {
+        alert('Booking not found!');
+        return;
+    }
+    
+    const booking = bookings[bookingIndex];
+    
+    // Update booking status to cancelled
+    booking.status = 'cancelled';
+    booking.cancelledAt = new Date().toISOString();
+    booking.cancelledBy = 'admin';
+    booking.refunded = false; // Will need to process refund
+    
+    // Restore car stock (since car was never picked up)
+    const carName = booking.car || booking.carName;
+    const currentStock = parseInt(localStorage.getItem('stock_' + carName) || '0');
+    localStorage.setItem('stock_' + carName, currentStock + 1);
+    
+    // Save updated bookings
+    localStorage.setItem('azoom_bookings', JSON.stringify(bookings));
+    
+    // Refresh dashboard
+    loadDashboardData();
+    alert('✅ Booking cancelled! Please process the refund.');
 }
 
 // ========== POPULAR CARS REPORT ==========

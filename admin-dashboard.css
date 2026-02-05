@@ -548,6 +548,11 @@
     color: #d32f2f;
 }
 
+.booking-status.status-pending {
+    background: #fff8e1;
+    color: #f57c00;
+}
+
 /* ========== FLEET OVERVIEW ========== */
 .fleet-overview-section {
     margin-bottom: 40px;
@@ -1721,6 +1726,24 @@
 
 .btn-mark-returned:hover {
     background: #219a52;
+}
+
+/* Cancel Button for Pending Pickup Bookings */
+.btn-cancel {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
 }
 
 /* Refund Button for Cancelled Bookings */
