@@ -1671,6 +1671,24 @@
     background: #219a52;
 }
 
+/* Refund Button for Cancelled Bookings */
+.btn-refund {
+    background: #f39c12;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-refund:hover {
+    background: #e67e22;
+    transform: translateY(-1px);
+}
+
 /* Inline Inspection Options */
 .inspection-options {
     display: flex;

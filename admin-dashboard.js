@@ -727,6 +727,10 @@ function updateBookingStatusCards(bookings, today) {
     const returned = bookings.filter(b => b.status === 'returned');
     const cancelled = bookings.filter(b => b.status === 'cancelled');
     
+    // Pending refunds: cancelled bookings that haven't been refunded yet
+    const pendingRefunds = cancelled.filter(b => !b.refunded);
+    const refundedCount = cancelled.filter(b => b.refunded).length;
+    
     // Pending Pickup: confirmed bookings where pickup date+time is in the future
     const pendingPickup = confirmed.filter(b => {
         const pickupDateTime = getPickupDateTime(b);
@@ -737,11 +741,21 @@ function updateBookingStatusCards(bookings, today) {
     const returnedCountEl = document.getElementById('returnedCount');
     const cancelledCountEl = document.getElementById('cancelledCount');
     const pendingPickupEl = document.getElementById('pendingPickup');
+    const cancelledDescEl = document.querySelector('.status-card.cancelled .status-desc');
     
     if (confirmedCountEl) confirmedCountEl.textContent = confirmed.length;
     if (returnedCountEl) returnedCountEl.textContent = returned.length;
     if (cancelledCountEl) cancelledCountEl.textContent = cancelled.length;
     if (pendingPickupEl) pendingPickupEl.textContent = pendingPickup.length;
+    
+    // Update cancelled description to show pending refunds
+    if (cancelledDescEl) {
+        if (pendingRefunds.length > 0) {
+            cancelledDescEl.innerHTML = `<span style="color: #e74c3c; font-weight: bold;">⚠️ ${pendingRefunds.length} pending refund${pendingRefunds.length > 1 ? 's' : ''}</span>`;
+        } else {
+            cancelledDescEl.textContent = 'All refunded';
+        }
+    }
 }
 
 // Load users into the table with delete actions
@@ -923,6 +937,13 @@ function loadBookingsTable(bookings) {
             } else {
                 // Awaiting inspection - scroll to inspection section
                 actionBtn = `<button class="btn-inspect" onclick="scrollToInspectionSection()" title="Go to inspection section">🔍 Inspect</button>`;
+            }
+        } else if (booking.status === 'cancelled') {
+            // Cancelled = check if refunded
+            if (booking.refunded) {
+                actionBtn = `<span class="condition-badge condition-excellent">💰 Refunded</span>`;
+            } else {
+                actionBtn = `<button class="btn-refund" onclick="processRefund('${booking.id}')" title="Process refund for customer">💰 Refund</button>`;
             }
         }
         
@@ -1577,4 +1598,50 @@ function updatePopularCars(bookings, cars) {
             </div>
         `;
     }).join('');
+}
+
+// ========== REFUND PROCESSING FOR CANCELLED BOOKINGS ==========
+function processRefund(bookingId) {
+    const bookings = JSON.parse(localStorage.getItem('azoom_bookings') || '[]');
+    const bookingIndex = bookings.findIndex(b => String(b.id) === String(bookingId));
+    
+    if (bookingIndex === -1) {
+        alert('Booking not found!');
+        return;
+    }
+    
+    const booking = bookings[bookingIndex];
+    const refundAmount = parseFloat(booking.total) || 0;
+    
+    // Confirm refund
+    const confirmRefund = confirm(
+        `💰 PROCESS REFUND\n\n` +
+        `Booking ID: #${booking.id}\n` +
+        `Customer: ${booking.userName || booking.userEmail}\n` +
+        `Car: ${booking.car || booking.carName}\n` +
+        `Payment Method: ${booking.paymentMethod || 'N/A'}\n\n` +
+        `Refund Amount: $${refundAmount.toFixed(2)}\n\n` +
+        `Click OK to confirm the refund has been processed.`
+    );
+    
+    if (!confirmRefund) return;
+    
+    // Mark booking as refunded
+    booking.refunded = true;
+    booking.refundedAt = new Date().toISOString();
+    booking.refundedBy = JSON.parse(localStorage.getItem('currentAdmin'))?.email || 'staff';
+    booking.refundAmount = refundAmount;
+    
+    // Save updated bookings
+    localStorage.setItem('azoom_bookings', JSON.stringify(bookings));
+    
+    // Refresh dashboard
+    loadDashboardData();
+    
+    alert(
+        `✅ Refund Processed!\n\n` +
+        `Customer: ${booking.userName || booking.userEmail}\n` +
+        `Amount: $${refundAmount.toFixed(2)}\n\n` +
+        `The booking has been marked as refunded.`
+    );
 }
