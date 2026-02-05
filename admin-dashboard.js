@@ -943,7 +943,7 @@ function loadBookingsTable(bookings) {
             if (booking.refunded) {
                 actionBtn = `<span class="condition-badge condition-excellent">💰 Refunded</span>`;
             } else {
-                actionBtn = `<button class="btn-refund" onclick="processRefund('${booking.id}')" title="Process refund for customer">💰 Refund</button>`;
+                actionBtn = `<button class="btn-refund" onclick="processRefund('${booking.id}')" title="Process refund for customer">💰 Processing Refund</button>`;
             }
         }
         
