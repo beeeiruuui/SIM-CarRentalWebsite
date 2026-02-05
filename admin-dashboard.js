@@ -846,7 +846,7 @@ function loadAdminTable() {
                 <td>#${admin.staffId || admin.id || (2000 + admins.length - index)}</td>
                 <td>${admin.firstName || ''} ${admin.lastName || ''} ${isSelf ? '<span style="color: #00ff88; font-size: 0.8em;">(You)</span>' : ''}</td>
                 <td>${admin.email}</td>
-                <td><span class="tier-badge" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">${admin.department || 'General'}</span></td>
+                <td>${admin.department || 'General'}</td>
                 <td>${admin.signupDate ? new Date(admin.signupDate).toLocaleDateString() : 'N/A'}</td>
                 <td>
                     <div class="user-actions">

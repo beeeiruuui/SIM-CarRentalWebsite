@@ -1035,6 +1035,16 @@
     font-weight: 600;
 }
 
+.department-badge {
+    background: #f0f4ff;
+    color: #4a5568;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+}
+
 .user-actions {
     display: flex;
     align-items: center;
