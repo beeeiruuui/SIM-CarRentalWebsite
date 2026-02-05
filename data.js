@@ -69,7 +69,7 @@ const localCars = [
             { angle: 'Interior', image: 'CarsForRent/Tesla Model 3/interior.jpg' }
         ]
     },
-    /*{
+    {
         name: 'Tesla Model Y',
         price: 105,
         stock: 4,
