@@ -724,7 +724,7 @@ function getPickupDateTime(booking) {
 // Update Booking Status Cards
 function updateBookingStatusCards(bookings, today) {
     const now = new Date(); // Current date AND time
-    const confirmed = bookings.filter(b => b.status === 'confirmed');
+    const allConfirmed = bookings.filter(b => b.status === 'confirmed');
     const returned = bookings.filter(b => b.status === 'returned');
     const cancelled = bookings.filter(b => b.status === 'cancelled');
     
@@ -733,9 +733,15 @@ function updateBookingStatusCards(bookings, today) {
     const refundedCount = cancelled.filter(b => b.refunded).length;
     
     // Pending Pickup: confirmed bookings where pickup date+time is in the future
-    const pendingPickup = confirmed.filter(b => {
+    const pendingPickup = allConfirmed.filter(b => {
         const pickupDateTime = getPickupDateTime(b);
         return pickupDateTime > now; // Pickup datetime hasn't passed yet
+    });
+    
+    // Actually rented: confirmed bookings where pickup datetime has passed (customer has the car)
+    const actuallyRented = allConfirmed.filter(b => {
+        const pickupDateTime = getPickupDateTime(b);
+        return pickupDateTime <= now; // Pickup datetime has passed
     });
     
     const confirmedCountEl = document.getElementById('confirmedCount');
@@ -744,7 +750,8 @@ function updateBookingStatusCards(bookings, today) {
     const pendingPickupEl = document.getElementById('pendingPickup');
     const cancelledDescEl = document.querySelector('.status-card.cancelled .status-desc');
     
-    if (confirmedCountEl) confirmedCountEl.textContent = confirmed.length;
+    // Confirmed shows only actually rented (pickup time passed), not pending
+    if (confirmedCountEl) confirmedCountEl.textContent = actuallyRented.length;
     if (returnedCountEl) returnedCountEl.textContent = returned.length;
     if (cancelledCountEl) cancelledCountEl.textContent = cancelled.length;
     if (pendingPickupEl) pendingPickupEl.textContent = pendingPickup.length;
