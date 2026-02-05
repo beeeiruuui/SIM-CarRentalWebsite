@@ -203,8 +203,9 @@ function generateMonthlyReport() {
     cars.forEach(car => {
         const stockKey = 'stock_' + car.name;
         const storedStock = localStorage.getItem(stockKey);
-        const currentStock = storedStock !== null ? parseInt(storedStock) : car.stock;
-        totalStock += car.stock;
+        const originalStock = car.originalStock || car.stock; // Use original stock from data.js
+        const currentStock = storedStock !== null ? parseInt(storedStock) : originalStock;
+        totalStock += originalStock;
         availableStock += currentStock;
     });
     const rentedCount = totalStock - availableStock;
@@ -601,10 +602,10 @@ function loadDashboardData() {
     const activeFleetElement = document.getElementById('activeFleet');
     const fleetStatusElement = document.getElementById('fleetStatus');
     
-    // Calculate total stock from cars data (original capacity)
+    // Calculate total stock from cars data (original capacity from data.js)
     let totalStock = 0;
     cars.forEach(car => {
-        totalStock += car.stock;
+        totalStock += car.originalStock || car.stock; // Use originalStock if available
     });
     
     // Count confirmed bookings by pickup datetime status

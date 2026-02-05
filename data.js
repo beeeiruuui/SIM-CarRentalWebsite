@@ -131,6 +131,7 @@ function getCars() {
         const currentStock = storedStock !== null ? parseInt(storedStock) : car.stock;
         return {
             ...car,
+            originalStock: car.stock, // Preserve original stock for fleet calculations
             stock: currentStock,
             available: currentStock > 0
         };
