@@ -413,7 +413,7 @@ function exportBookingsPDF() {
             <div class="footer">
                 <p>Thank you for choosing AZoom Car Rental!</p>
                 <p>🌱 100% Electric Fleet - Driving Towards a Greener Future</p>
-                <p>🚗 Storhub, 615 Lorong 4 Toa Payoh</p>
+                <p>🚗 Storhub, 615 Lorong 4 Toa Payoh | 🚗 Keppel Bay, 2 Keppel Bay Vista</p>
                 <p>📞 +65 8682 8785 | ✉️ info@azoomcarrental.sg</p>
             </div>
             
