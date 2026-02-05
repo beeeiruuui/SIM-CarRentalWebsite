@@ -884,7 +884,7 @@ function openDeleteAdminModal(adminId, adminEmail, adminName) {
     }
     
     // Change the confirm button to call admin delete
-    const confirmBtn = modal.querySelector('.btn-confirm-delete');
+    const confirmBtn = modal.querySelector('.btn-modal-delete');
     if (confirmBtn) {
         confirmBtn.setAttribute('onclick', 'confirmDeleteAdmin()');
     }
@@ -910,7 +910,7 @@ function confirmDeleteAdmin() {
     
     // Reset the confirm button back to user delete
     const modal = document.getElementById('deleteUserModal');
-    const confirmBtn = modal.querySelector('.btn-confirm-delete');
+    const confirmBtn = modal.querySelector('.btn-modal-delete');
     if (confirmBtn) {
         confirmBtn.setAttribute('onclick', 'confirmDeleteUser()');
     }
