@@ -1026,6 +1026,15 @@
     font-weight: 600;
 }
 
+.admin-count-badge {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
 .user-actions {
     display: flex;
     align-items: center;

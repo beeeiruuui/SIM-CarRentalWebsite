@@ -681,6 +681,7 @@ function loadDashboardData() {
     
     // ========== UPDATE TABLES ==========
     loadUsersTable(users);
+    loadAdminTable();
     loadBookingsTable(bookings);
     
     // ========== ACTIVITY FEED ==========
@@ -810,6 +811,117 @@ function loadUsersTable(users) {
             </tr>
         `;
     }).join('');
+}
+
+// ========== ADMIN/STAFF TABLE ==========
+function loadAdminTable() {
+    const tableBody = document.getElementById('adminTableBody');
+    const adminCountBadge = document.getElementById('adminCountBadge');
+    if (!tableBody) return;
+    
+    // Get all staff/admins from localStorage
+    const admins = JSON.parse(localStorage.getItem('azoom_staff') || '[]');
+    
+    // Update admin count badge
+    if (adminCountBadge) {
+        adminCountBadge.textContent = admins.length;
+    }
+    
+    // Show all admins (most recent first)
+    const allAdmins = admins.slice().reverse();
+    
+    if (allAdmins.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No admins yet</td></tr>';
+        return;
+    }
+    
+    // Get current admin to prevent self-deletion
+    const currentAdmin = JSON.parse(localStorage.getItem('currentAdmin') || '{}');
+    
+    tableBody.innerHTML = allAdmins.map((admin, index) => {
+        const isSelf = currentAdmin.email === admin.email;
+        
+        return `
+            <tr data-admin-email="${admin.email}" ${isSelf ? 'style="background-color: rgba(0, 255, 136, 0.1);"' : ''}>
+                <td>#${admin.staffId || admin.id || (2000 + admins.length - index)}</td>
+                <td>${admin.firstName || ''} ${admin.lastName || ''} ${isSelf ? '<span style="color: #00ff88; font-size: 0.8em;">(You)</span>' : ''}</td>
+                <td>${admin.email}</td>
+                <td><span class="tier-badge" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">${admin.department || 'General'}</span></td>
+                <td>${admin.signupDate ? new Date(admin.signupDate).toLocaleDateString() : 'N/A'}</td>
+                <td>
+                    <div class="user-actions">
+                        ${isSelf ? 
+                            '<span style="color: #999; font-size: 0.85em;">Cannot delete self</span>' : 
+                            `<button class="btn-delete-user" onclick="openDeleteAdminModal('${admin.staffId || admin.id || (2000 + admins.length - index)}', '${admin.email}', '${(admin.firstName || '') + ' ' + (admin.lastName || '')}')" title="Delete Admin">
+                                🗑️
+                            </button>`
+                        }
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// ========== ADMIN MANAGEMENT - DELETE FUNCTIONALITY ==========
+let adminToDelete = null;
+
+// Open delete admin confirmation modal
+function openDeleteAdminModal(adminId, adminEmail, adminName) {
+    adminToDelete = { id: adminId, email: adminEmail, name: adminName.trim() };
+    
+    // Reuse the same modal structure but update content
+    const modal = document.getElementById('deleteUserModal');
+    const userInfo = document.getElementById('userToDeleteInfo');
+    
+    if (userInfo) {
+        userInfo.innerHTML = `
+            <p><strong>Staff ID:</strong> #${adminId}</p>
+            <p><strong>Name:</strong> ${adminName.trim() || 'N/A'}</p>
+            <p><strong>Email:</strong> ${adminEmail}</p>
+            <p style="color: #ff6b6b; margin-top: 10px;"><strong>⚠️ Deleting an admin account!</strong></p>
+        `;
+    }
+    
+    // Change the confirm button to call admin delete
+    const confirmBtn = modal.querySelector('.btn-confirm-delete');
+    if (confirmBtn) {
+        confirmBtn.setAttribute('onclick', 'confirmDeleteAdmin()');
+    }
+    
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+// Confirm and delete admin
+function confirmDeleteAdmin() {
+    if (!adminToDelete) return;
+    
+    const deletedAdminName = adminToDelete.name || 'Unknown';
+    
+    const admins = JSON.parse(localStorage.getItem('azoom_staff') || '[]');
+    const updatedAdmins = admins.filter(admin => admin.email !== adminToDelete.email);
+    
+    localStorage.setItem('azoom_staff', JSON.stringify(updatedAdmins));
+    
+    // Close modal and refresh
+    closeDeleteModal();
+    
+    // Reset the confirm button back to user delete
+    const modal = document.getElementById('deleteUserModal');
+    const confirmBtn = modal.querySelector('.btn-confirm-delete');
+    if (confirmBtn) {
+        confirmBtn.setAttribute('onclick', 'confirmDeleteUser()');
+    }
+    
+    adminToDelete = null;
+    
+    // Refresh admin table
+    loadAdminTable();
+    
+    // Show success notification
+    showNotification(`Admin "${deletedAdminName}" has been deleted`, 'success');
 }
 
 // ========== USER MANAGEMENT - DELETE FUNCTIONALITY ==========
