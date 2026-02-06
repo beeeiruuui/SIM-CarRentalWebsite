@@ -553,6 +553,26 @@
     color: #f57c00;
 }
 
+/* Due In badges */
+.due-overdue {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+.due-today {
+    color: #e65100;
+    font-weight: 600;
+}
+
+.due-soon {
+    color: #f57c00;
+    font-weight: 500;
+}
+
+.due-normal {
+    color: #666;
+}
+
 /* ========== FLEET OVERVIEW ========== */
 .fleet-overview-section {
     margin-bottom: 40px;

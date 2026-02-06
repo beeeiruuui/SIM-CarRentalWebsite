@@ -1027,6 +1027,47 @@ function setActiveNav(clickedElement) {
 }
 
 // Load bookings into table
+// Calculate time remaining until return
+function calculateTimeRemaining(booking) {
+    if (booking.status !== 'confirmed') return '-';
+    
+    const now = new Date();
+    const pickupDate = new Date(booking.pickupDate);
+    const totalDays = parseInt(booking.totalDays) || 1;
+    
+    // Calculate expected return date
+    const returnDate = new Date(pickupDate);
+    returnDate.setDate(returnDate.getDate() + totalDays);
+    
+    const diffMs = returnDate - now;
+    const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+    
+    if (diffDays < 0) {
+        const overdueDays = Math.abs(diffDays);
+        return `<span class="due-overdue">⚠️ ${overdueDays}d overdue</span>`;
+    } else if (diffDays === 0) {
+        return `<span class="due-today">📍 Due today</span>`;
+    } else if (diffDays === 1) {
+        return `<span class="due-soon">⏰ Tomorrow</span>`;
+    } else if (diffDays <= 7) {
+        return `<span class="due-soon">⏰ ${diffDays} days</span>`;
+    } else if (diffDays <= 30) {
+        const weeks = Math.floor(diffDays / 7);
+        const remainingDays = diffDays % 7;
+        if (remainingDays === 0) {
+            return `<span class="due-normal">${weeks}w</span>`;
+        }
+        return `<span class="due-normal">${weeks}w ${remainingDays}d</span>`;
+    } else {
+        const months = Math.floor(diffDays / 30);
+        const remainingDays = diffDays % 30;
+        if (remainingDays === 0) {
+            return `<span class="due-normal">${months}mo</span>`;
+        }
+        return `<span class="due-normal">${months}mo ${remainingDays}d</span>`;
+    }
+}
+
 function loadBookingsTable(bookings) {
     const tableBody = document.getElementById('bookingsTableBody');
     if (!tableBody) return;
@@ -1036,7 +1077,7 @@ function loadBookingsTable(bookings) {
     const now = new Date();
     
     if (allBookings.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No bookings yet</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #999;">No bookings yet</td></tr>';
         return;
     }
     
@@ -1045,6 +1086,7 @@ function loadBookingsTable(bookings) {
         let displayStatus = booking.status;
         let statusClass = '';
         let actionBtn = '-';
+        let dueIn = '-';
         
         if (booking.status === 'confirmed') {
             const pickupDateTime = getPickupDateTime(booking);
@@ -1053,11 +1095,13 @@ function loadBookingsTable(bookings) {
                 displayStatus = 'pending pickup';
                 statusClass = 'status-pending';
                 actionBtn = `<button class="btn-cancel" onclick="cancelBooking('${booking.id}')" title="Cancel this booking">Cancel</button>`;
+                dueIn = '<span class="due-normal">Not started</span>';
             } else {
-                // Pickup time passed - car is out
+                // Pickup time passed - car is out, show time remaining
                 displayStatus = 'confirmed';
                 statusClass = 'status-confirmed';
                 actionBtn = `<button class="btn-mark-returned" onclick="markAsReturned('${booking.id}')" title="Customer returned the car">Return</button>`;
+                dueIn = calculateTimeRemaining(booking);
             }
         } else if (booking.status === 'returned') {
             statusClass = 'status-returned';
@@ -1087,6 +1131,7 @@ function loadBookingsTable(bookings) {
                 <td>${booking.userName || booking.userEmail || 'Guest'}</td>
                 <td>${booking.car || 'N/A'}</td>
                 <td><span class="booking-status ${statusClass}">${displayStatus}</span></td>
+                <td>${dueIn}</td>
                 <td>$${parseFloat(booking.finalBill || booking.total || 0).toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
                 <td>${actionBtn}</td>
             </tr>
